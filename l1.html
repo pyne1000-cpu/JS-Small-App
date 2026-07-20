@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion</title>
+
+    <!-- fontawesome css1  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .accordion{
+            width: 100%;
+        }
+
+        .accordion .acctitle{
+            background-color: #777;
+            color: #fff;
+            font-size: 14px;
+
+            padding: 10px 5px; 
+            margin: 0%;
+
+            cursor: pointer;
+            user-select: none;
+
+            position: relative;
+        }
+        .acctitle:hover,.acctitle.active{
+            background-color: steelblue;
+        }
+
+        .accordion .acctitle i{
+                position: absolute;
+                right: 10px;
+                top: 50%;
+
+                transform: translateY(-50%);
+
+                /* float: right; */
+        }
+
+        .accordion .acccontent{
+            height: 0;
+            background-color: #f4f4f4;
+            text-indent: 30px;
+            text-align: center;
+            font-size: 14px;
+            padding: 0 20px;
+
+            /* overflow-wrap: break-word; */
+            overflow-wrap: anywhere;
+            /* word-break: break-all; */
+
+            overflow: hidden;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="accordion">
+        <div>
+            <h3 class="acctitle active">1.Java Script blah blah blah <i class="fa-solid fa-angle-down"></i></h3>
+            <div class="acccontent">
+                <p>############################################################################################################################################################################################################################################################################################################################</p>
+            </div>
+        </div>
+        <div>
+            <h3 class="acctitle">2.Java Script blah blah blah <i class="fa-solid fa-angle-down"></i></h3>
+            <div class="acccontent">
+                <p>############################################################################################################################################################################################################################################################################################################################</p>
+            </div>
+        </div>
+        <div class="">
+            <h3  class="acctitle">3.Java Script blah blah blah <i class="fa-solid fa-angle-down"></i></h3>
+            <div class="acccontent">
+                <p>############################################################################################################################################################################################################################################################################################################################</p>
+            </div>
+        </div>
+        <div class="">
+            <h3 class="acctitle">4.Java Script blah blah blah <i class="fa-solid fa-angle-down"></i></h3>
+            <div class="acccontent">
+                <p>############################################################################################################################################################################################################################################################################################################################</p>
+            </div>
+        </div>
+        <div class="">
+            <h3 class="acctitle">5.Java Script blah blah blah <i class="fa-solid fa-angle-down"></i></h3>
+            <div class="acccontent">
+                <p>############################################################################################################################################################################################################################################################################################################################</p>
+            </div>
+        </div>
+        <div >
+            <h3 class="acctitle">6.Java Script blah blah blah <i class="fa-solid fa-angle-down"></i></h3>
+            <div class="acccontent">
+                <p>############################################################################################################################################################################################################################################################################################################################</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const getacctitles = document.getElementsByClassName('acctitle');
+        const getaccconts = document.getElementsByClassName('acccontent');
+        console.log(getacctitles);
+
+        for(i=0;i<getacctitles.length;i++){
+            console.log(i);
+            getacctitles[i].addEventListener('click',function(e){
+                console.log(this);
+
+                this.classList.toggle('active');
+
+                const getacccont = this.nextElementSibling;
+                console.log(getacccont);
+                console.log(getacccont.scrollHeight + "px");
+                
+
+                if(getacccont.style.height){
+                    getacccont.style.height = null;
+                }else{
+                    getacccont.style.height = getacccont.scrollHeight + "px";
+                }
+            })
+
+            if(getacctitles[i].classList.contains('active')){
+                getaccconts[i].style.height = getaccconts[i].scrollHeight + "px";
+            }
+        }
+
+    </script>
+
+</body>
+</html> 
