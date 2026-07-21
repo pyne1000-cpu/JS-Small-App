@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 2</title>
+    <title>Scroll Indicator and Printer</title>
+
+   <!-- custom css for printer  -->
+   <link rel="stylesheet" href="./l2.css" media="print">
 
     <!-- fontawesome css1  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -28,7 +31,7 @@
             left: 0;
         }
         .progress-bar{
-            width: 50%;
+            width: 0;
             height: inherit;
             background-color: aqua;
         }
@@ -67,7 +70,7 @@
 </head>
 <body>
     <div class="progress">
-        <div class="progress-bar"></div>
+        <div class="progress-bar" id="progress-bar"></div>
     </div>
     <div class="title">
             <h2 class="">Java Script Scroll</h2>
@@ -75,7 +78,7 @@
     <div class="container">
         <section>
             <h3 class="" >From Lorem Ipsum</h3>
-            <button class=""><i class="fa-solid fa-print"></i></button>
+            <button class="" onclick="printme()"><i class="fa-solid fa-print"></i></button>
 
             <p class="content">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
 
@@ -96,5 +99,50 @@ The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those 
 The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
         </section>
     </div>
+
+    <script>
+        const getprogressbar = document.getElementById('progress-bar')
+        console.log(getprogressbar);
+
+        window.onscroll=function(){
+            const getscrolltop = document.documentElement.scrollTop;
+            // console.log(getscrolltop);  //1211 y
+
+            const getclientheight = document.documentElement.clientHeight;
+            // console.log(getclientheight);  //547 z
+            
+            const getscrollheight = document.documentElement.scrollHeight;
+            // console.log(getscrollheight);  //1758  x
+
+            // const getmaxofscrolltop = getscrollheight - getscrolltop;  //a
+            // console.log(getmaxofscrolltop);
+
+            // const getwidth = `${(getscrollheight/getmaxofscrolltop)*100}`;  //WRONG
+            // console.log(getwidth);
+
+            // const getwidth = `${(getclientheight/getmaxofscrolltop)*100}`;  //WRONG
+            // console.log(getwidth);
+            
+            const getmaxofscrolltop = getscrollheight - getclientheight;  //a
+            // console.log(getmaxofscrolltop);
+
+            const getwidth = `${(getscrolltop/getmaxofscrolltop)*100}`
+            console.log(getwidth);
+
+            // const getwidth = `${((getscrolltop+getclientheight)/getscrollheight)*100}`
+            // console.log(getscrolltop+getclientheight);
+            // console.log(getwidth);
+
+            getprogressbar.style.width = `${getwidth}%`;
+
+        }
+
+        // print function 
+        function printme(){
+            console.log('print');
+            window.print();
+        }
+    </script>
+
 </body>
 </html>
