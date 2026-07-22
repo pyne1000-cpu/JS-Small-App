@@ -1,3 +1,27 @@
 body{
     color: blue;
 }
+
+.title{
+    background-color: steelblue !important;
+    color: #fff !important;
+
+    -webkit-print-color-adjust:exact;
+
+    position: static !important;
+}
+
+.container{
+    margin: 0  auto !important;
+    padding: 0 !important;
+}
+.progress,.btn{
+    display: none;
+}
+
+
+
+@page{
+    margin: 0%;
+    size: landscape;
+}

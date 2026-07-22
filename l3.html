@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+
+<style>
+    body{
+        height: 100vh;
+        background-color: #444;
+
+        display: grid;
+        place-items: center;
+    }
+
+    .box{
+        width: 300px;
+        height: 100px;
+        background-color: #f4f4f4;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        border-radius: 24px;
+
+        padding: 10px;
+        
+        position: relative;
+    }
+
+    .progress{
+        width: 90%;
+        height: 15px;
+        background-color: rgb(6, 6, 6);
+
+        position: absolute;
+        top: 30px;
+        left: 5%;
+
+        overflow: hidden;
+    }
+
+    .progress-bar{
+        text-align: end;
+        width: 0%;
+        height: 100%;
+        background-color: rgb(229, 255, 0);
+        
+        position: relative;
+    }
+    .progress-bar::before{
+        content: attr(data-percent);
+
+        color: #101010;
+
+        position: absolute;
+        right: 5px;
+        top: 50%;
+
+        transform: translateY(-50%);
+    }
+
+    .btn{
+        background-color: rgb(1, 18, 12);
+        color: #fff;
+        border: none;
+        outline: none;  
+        border-radius: 20px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+        padding: 5px 10px;
+
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+    }
+    .btn:active{
+        transform: translateY(1px);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+
+
+    }
+</style>
+
+</head>
+<body>
+    <div class="box">
+        <div class="progress">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <button class="btn" id="btn" onclick="btnclick()">Click Me</button>
+    </div>
+
+    <script>
+        const progressbar = document.getElementById('progress-bar');
+
+        const btn = document.getElementById('btn');
+
+        const seturl = "https://threeidiots.onrender.com";
+        
+        function btnclick(){
+
+            let percent = 0;
+
+            function runprogress(){
+                    percent++;
+                    console.log(percent);
+                
+                    if(percent>100){
+                        clearInterval(timer);
+                        // window.location.reload();
+                        window.location.href = seturl;
+                    }else{
+                        
+                        progressbar.style.width = `${percent}%`;
+                        progressbar.setAttribute("data-percent",`${percent}%`); 
+                        btn.setAttribute('disabled',true);
+
+                    }
+                }
+
+            const timer = setInterval(runprogress,100);
+
+        }
+
+    </script>
+</body>
+</html>
