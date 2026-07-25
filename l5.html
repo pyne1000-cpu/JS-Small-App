@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Box</title>
+
+    <!-- fontawesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- custom css  -->
+    <style>
+        body{
+            box-sizing: border-box;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+        }
+        
+        .container{
+            background: linear-gradient(skyblue,white);
+            width: 600px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .6);
+            
+        }
+
+        .box{
+            text-align: center;
+            width: 500px;
+            margin: auto;
+
+            position: relative;
+        }
+        .box h1{
+            letter-spacing: 1px;
+        }
+        .box button,.modal button,.full-scr-btn{
+            background-color: skyblue;
+            color: #f4f4f4;
+            border: none;
+            outline: none;
+            border-radius: 20px;
+
+            font-size: large;
+            font-weight: bold;
+
+            padding: 10px 50px;
+
+            opacity: .9;
+        }
+        .full-scr-btn{
+            margin: 0 10px 20px 0;
+        }
+        .box button:hover,.modal button:hover,.full-scr-btn{
+            opacity: 1;
+        }
+
+
+        .modal-box{
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            backdrop-filter: blur(5px);
+
+            position: fixed;
+            
+
+            display: none;
+
+            z-index: 10;
+        }
+        .modal{
+            color: #f4f4f4;
+            text-align: center;
+            width: 300px;
+            background-color: darkblue;
+
+            padding:0 0 15px 0;
+
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cls-btn{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+        .modal input{
+            outline: none;
+            border: none;
+            width: 100%;
+            padding: 10px 5px;
+        }
+
+        .email-box,.psw-box{
+            display: flex;
+            border-top: 1px solid rgba(255, 252, 252, 0.3);
+            padding: 10px 5px;
+        }
+        .psw-box{
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 252, 252, 0.3);
+        }
+
+        .email-box span,.psw-box span{
+            margin: auto 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1 style="color: rgb(237, 239, 240);">Welcome To JDIT</h1>
+            <p>မင်္ဂလာပါ JDITမှ ကြိုဆိုပါတယ်</p>
+            <p>JDITရဲ့ Serviceများကို အပြည့်ဝ အသုံးပြုနိုင်ရန် သင်၏ Accountကို Login ဝင်ပေးပါ။</p>
+            <button id="btn1" type="button">Login</button>
+            <p>Accountမရှိသေးပါက Accountဖွင့်ရန် <a href="#">Sign up</a></p>
+            <button id="ful-scr-btn" class="full-scr-btn" type="button">Full Screen</button>
+            <button id="exit-ful-scr-btn" class="full-scr-btn" type="button" style="display: none;">Exit Full Screen</button> 
+        </div>
+        
+    </div>
+    <div id="modal-box" class="modal-box">
+        <div id="modal" class="modal">
+            <form action="">
+                <span id="cls-btn" class="cls-btn"><i class="fa-solid fa-xmark"></i></span>
+                <h2>Login to your Account</h2>
+                <div class="email-box">
+                    <span><i class="fa-solid fa-envelope"></i></span>
+                    <input type="email" name="email" id="email" placeholder="Enter your Email" required>
+                </div>
+                <div class="psw-box">
+                    <span><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" name="password" id="password" placeholder="Enter your Password" required>
+                </div>
+                <button type="button">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const getbtn1 = document.getElementById('btn1');
+        // console.log(getbtn1);
+
+        const getmodalBox = document.getElementById('modal-box');
+        // console.log(getmodalBox);
+
+        const getclsbtn = document.getElementById('cls-btn')
+
+        getbtn1.addEventListener('click',function(){
+            // console.log('show up')
+            getmodalBox.style.display = "block";
+
+            getclsbtn.onclick = function(){
+                getmodalBox.style.display = "none";
+            }
+
+            window.onclick = function(e){
+                //    console.log(e.target);                
+
+                if(e.target == getmodalBox){
+                    getmodalBox.style.display = "none";
+                }
+            }
+        })
+
+        const getdocele=document.documentElement;
+
+        const getfulscrbtn = document.getElementById('ful-scr-btn');
+
+        const getexitfulscrbtn = document.getElementById('exit-ful-scr-btn');
+
+        getfulscrbtn.addEventListener('click',function(){
+            
+            if(getdocele.requestFullscreen){
+                getdocele.requestFullscreen();
+            }else if(getdocele.webkitRequestFullscreen){
+                getdocele.webkitRequestFullscreen();
+            }else if(getdocele.msRequestFullscreen){
+                getdocele.msRequestFullscreen();
+            }
+
+            getexitfulscrbtn.style.display = 'inline-block';
+
+            getexitfulscrbtn.addEventListener('click',function(){
+                if(document.exitFullscreen){
+                    document.exitFullscreen();
+                }else if(document.webkitExitFullscreen){
+                    document.webkitExitFullscreen();
+                }else if(document.msExitFullscreen){
+                    document.msExitFullscreen();
+                }
+
+                getexitfulscrbtn.style.display = 'none';
+
+
+            })
+        })
+
+
+    </script>
+</body>
+</html>
