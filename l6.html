@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs</title>
+
+    <!-- custom css  -->
+     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+            
+        }
+
+        .container{
+            width: 700px;
+            background-color: #f4f4f4;
+        }
+        .nav-bar{
+            width: 100%;
+            background-color: #f4f4f4;
+        }
+        .nav-bar ul{
+            list-style: none;
+            color: #333;
+
+            display: flex;
+            justify-content: start;
+        }
+        .nav-bar ul li .tablink{
+            border: none;
+            outline: none;
+            padding: 20px 30px;
+            border-right: 1px solid #ccc;
+            opacity: .9;
+        }
+        .nav-bar ul li .tablink:hover,.nav-bar ul li .tablink.active{
+            opacity: 1;
+            cursor: pointer;
+            background-color: #bebebe;
+        }
+
+        .content{
+            display: none;
+            background-color: silver;
+            text-indent: 20px;
+            text-align: justify;
+            border-bottom: 1px solid #333;
+            padding: 20px;
+
+            position: relative;
+        }
+        .content .clsbtn{
+            font-size: 20px;
+            font-weight: bold;
+
+            position: absolute;
+            top: 5px;
+            right: 20px;
+        }
+        .content .clsbtn:hover{
+            color: red;
+            cursor: pointer;
+        }
+     </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <ul>
+                <li><button id="autoclick" class="tablink" onclick="tablink(event,'home')">Home</button></li>
+                <li><button class="tablink" onclick="tablink(event,'profile')">Profile</button></li>
+                <li><button class="tablink" onclick="tablink(event,'setting')">Setting</button></li>
+                <li><button class="tablink" onclick="tablink(event,'contact')">Contact</button></li>
+            </ul>
+        </div>
+        <div id="home" class="content">
+            <span class="clsbtn">&times;</span>
+            <h4>Life Long Learning (Home)</h4>
+            <p>computer science is adorable.it make me feel good.very interesting how hardware work,how software & hardware connect and work smooth,networking,security,how command to execute program,everything is working based on 0 & 1,root of all about computer science is mathematics,maths means a lots to everything in the universe</p>
+        </div>
+        <div id="profile" class="content">
+            <span class="clsbtn">&times;</span>
+            <h4>Life Long Learning (Profile)</h4>
+            <p>computer science is adorable.it make me feel good.very interesting how hardware work,how software & hardware connect and work smooth,networking,security,how command to execute program,everything is working based on 0 & 1,root of all about computer science is mathematics,maths means a lots to everything in the universe</p>
+        </div>
+        <div id="setting" class="content">
+            <span class="clsbtn">&times;</span>
+            <h4>Life Long Learning (Setting)</h4>
+            <p>computer science is adorable.it make me feel good.very interesting how hardware work,how software & hardware connect and work smooth,networking,security,how command to execute program,everything is working based on 0 & 1,root of all about computer science is mathematics,maths means a lots to everything in the universe</p>
+        </div>
+        <div id="contact" class="content">
+            <span class="clsbtn">&times;</span>
+            <h4>Life Long Learning (Contact)</h4>
+            <p>computer science is adorable.it make me feel good.very interesting how hardware work,how software & hardware connect and work smooth,networking,security,how command to execute program,everything is working based on 0 & 1,root of all about computer science is mathematics,maths means a lots to everything in the universe</p>
+        </div>
+    </div>
+
+    <script>
+        const gettablink = document.getElementsByClassName('tablink');
+        console.log(gettablink);
+        const getcontent = document.getElementsByClassName('content');
+        console.log(getcontent);
+        const getclsbtn = document.getElementsByClassName('clsbtn');
+        console.log(getclsbtn);
+        
+        function tablink(event,link){
+            console.log(event.target);
+            // console.log(link);
+
+            for(let x=0; x < gettablink.length; x++){
+                gettablink[x].classList.remove('active');
+                
+                // console.log(getcontent[x]);
+                getcontent[x].style.display = "none";
+
+                getclsbtn[x].addEventListener('click',function(){
+                    getcontent[x].style.display = "none";
+                })
+            }
+
+            event.target.classList.add('active');
+
+            const getlink = document.getElementById(`${link}`);
+            console.log(getlink);
+            getlink.style.display = "block";
+        }
+
+        const getautoclick = document.getElementById('autoclick');
+        getautoclick.click();
+        
+    </script>
+</body>
+</html>
