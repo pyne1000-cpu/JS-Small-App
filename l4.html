@@ -56,13 +56,12 @@
         }
 
         .carousel-item{
-            /* display: none; */
-
-            width: 500px;
+            width: 100%;
             height: inherit;
             text-align: center;
             background-color: #f4f4f4;
 
+            flex-wrap: nowrap;
         }
 
         .carousel-item img{
@@ -74,7 +73,6 @@
         }
 
         .prev,.next{
-            /* background-color: red; */
             font-size: 2rem;
             color: #555;
 
@@ -100,7 +98,6 @@
             transform: translateY(-50%);
 
             z-index: 10;
-
         }
       
     </style>
@@ -142,6 +139,7 @@
         // console.log(getprev);
         getprev.addEventListener('click',function(){
             current--;
+            //ဒီconditionစစ်တဲ့ကောင်ကို carousel function ထဲမှာ ထည့်ရေးလို့ရ,အဲ့လိုဆို နှစ်ခါ စစ်စရာမလို
             if(current>getcarouselitems.length-1){
                 current = 0;
             }else if(current<0){
@@ -155,6 +153,7 @@
         console.log(getnext);
         getnext.addEventListener('click',function(){
             current++;
+            //ဒီconditionစစ်တဲ့ကောင်ကို carousel function ထဲမှာ ထည့်ရေးလို့ရ,အဲ့လိုဆို နှစ်ခါ စစ်စရာမလို
             if(current>getcarouselitems.length-1){
                 current = 0;
             }else if(current<0){
