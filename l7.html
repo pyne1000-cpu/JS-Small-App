@@ -94,7 +94,6 @@
         </form>
         <div class="display">
             <ul>
-                <li><a href="javascript:void(0);">Aung Aung</a></li>
                 <li><a href="javascript:void(0);">Ye Thu</a></li>
                 <li><a href="javascript:void(0);">Hein Moe</a></li>
                 <li><a href="javascript:void(0);">Thiha Kyaw</a></li>
@@ -178,21 +177,52 @@
         const getinput = document.getElementById('search');
         const getul = document.querySelector('ul');
         const getli = getul.getElementsByTagName('li');
-        console.log(getli);
-        const getname = getul.textContent;
-        console.log(getname);
+        
+        for(let x=0; x<getli.length;x++){
+            let getname = getli[x].textContent.toLowerCase();
+            console.log(getname);
 
-        getinput.addEventListener('keyup',filter)
+        getinput.addEventListener('keyup',filter);
 
         function filter(){
             const filter = this.value.toLowerCase();
             // console.log(filter);
-
-            if(getname.toLowerCase().indexOf(filter)>-1){
-                getli.style.display = "";
-            }else{
-                getli.style.display = "none";
+            
+                if(getname.toLowerCase().indexOf(filter)>-1){
+                    getli[x].style.display = "";
+                }else{
+                    getli[x].style.display = "none";
+                }
             }
+            
+        }
+
+        getbtn1.addEventListener('click',atozm1);
+
+        function atozm1(){
+            let atozli=[];
+
+            for(let i=0; i<getli.length;i++){
+                // console.log(getli[i]);
+                console.log(getli[i].innerText);
+
+                atozli.push(getli[i].innerText);
+                atozli.sort();
+            }
+            console.log(typeof(atozli));
+
+            let newli = document.createElement('li');
+            let newa = document.createElement('a');
+
+            for(let y=0;y<atozli.length;y++){
+                console.log(y);
+                let atozname = atozli[y].innerText;
+                console.log(atozname);
+                // newa.appendChild();
+                // newli.appendChild(newa);
+                // console.log(newli);
+            }
+
         }
 
     </script>
