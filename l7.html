@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting & Searching</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+
+        .container{
+            width: 500px;
+            height: auto;
+            background-color: #f4f4f4;
+        }
+        .container form input{
+            display: block;
+            width: 90%;
+
+            padding: 5px;
+            margin: 20px;
+        }
+        .container form input:focus{
+            outline: none;
+        }    
+
+        .container form button{
+            width: 40%;
+            background-color: skyblue;
+            color: #fff;
+            border: none;
+            outline: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 2px #333;
+
+            margin-left: 30px;
+            margin-bottom: 10px;
+            padding: 10px;
+
+            opacity: .9;
+        }
+        .container form button:hover{
+            opacity: 1;
+        }
+        .container form button:active{
+            transform: translateY(1px);
+            box-shadow: 0 1px 2px #333;
+            opacity: 1;
+        }   
+
+        .container .display{
+            width: 90%;
+            height: 300px;
+            background-color: white;
+            border: 1px solid #333;
+            margin: 20px auto;
+
+            overflow-y: scroll;
+        }
+
+        .container .display ul{
+            list-style: none;
+        }
+
+        .container .display ul li{
+            border-bottom: 1px solid #888;
+            padding: 10px;
+        }
+
+        .container .display ul li a{
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="" method="">
+            <input type="text" id="search" placeholder="Type name to search" autofocus>
+            <button type="button" id="btn-1">A to Z M1</button>
+            <button type="button" id="btn-2">Z to A M1</button>
+            <button type="button" id="btn-3">A to Z M2</button>
+            <button type="button" id="btn-4">Z to A M2</button>
+        </form>
+        <div class="display">
+            <ul>
+                <li><a href="javascript:void(0);">Aung Aung</a></li>
+                <li><a href="javascript:void(0);">Ye Thu</a></li>
+                <li><a href="javascript:void(0);">Hein Moe</a></li>
+                <li><a href="javascript:void(0);">Thiha Kyaw</a></li>
+                <li><a href="javascript:void(0);">Aung Min</a></li>
+                <li><a href="javascript:void(0);">Myo Zaw</a></li>
+                <li><a href="javascript:void(0);">Kyaw Thu</a></li>
+                <li><a href="javascript:void(0);">Naing Lin</a></li>
+                <li><a href="javascript:void(0);">Phone Myat</a></li>
+                <li><a href="javascript:void(0);">Htet Moe</a></li>
+                <li><a href="javascript:void(0);">Soe Htet</a></li>
+                <li><a href="javascript:void(0);">Zaw Win</a></li>
+                <li><a href="javascript:void(0);">Min Khant</a></li>
+                <li><a href="javascript:void(0);">Aung Moe</a></li>
+                <li><a href="javascript:void(0);">Ye Lin</a></li>
+                <li><a href="javascript:void(0);">Kyaw Zin</a></li>
+                <li><a href="javascript:void(0);">Hein Aung</a></li>
+                <li><a href="javascript:void(0);">Thant Zin</a></li>
+                <li><a href="javascript:void(0);">Naing Thu</a></li>
+                <li><a href="javascript:void(0);">Aung Myo</a></li>
+                <li><a href="javascript:void(0);">Soe Moe</a></li>
+                <li><a href="javascript:void(0);">Htet Min</a></li>
+                <li><a href="javascript:void(0);">Kyaw Soe</a></li>
+                <li><a href="javascript:void(0);">Thiha Htet</a></li>
+                <li><a href="javascript:void(0);">Min Htet</a></li>
+                <li><a href="javascript:void(0);">Pyae Phyo</a></li>
+                <li><a href="javascript:void(0);">Zaw Moe</a></li>
+                <li><a href="javascript:void(0);">Ye Aung</a></li>
+                <li><a href="javascript:void(0);">Myo Min</a></li>
+                <li><a href="javascript:void(0);">Naing Aung</a></li>
+                <li><a href="javascript:void(0);">Kyaw Min</a></li>
+                <li><a href="javascript:void(0);">Hein Kyaw</a></li>
+                <li><a href="javascript:void(0);">Aung Kyaw</a></li>
+                <li><a href="javascript:void(0);">Thiha Min</a></li>
+                <li><a href="javascript:void(0);">Ye Htet</a></li>
+                <li><a href="javascript:void(0);">Min Thu</a></li>
+                <li><a href="javascript:void(0);">Naing Moe</a></li>
+                <li><a href="javascript:void(0);">Kyaw Kyaw</a></li>
+                <li><a href="javascript:void(0);">Myo Htet</a></li>
+                <li><a href="javascript:void(0);">Hein Min</a></li>
+                <li><a href="javascript:void(0);">Aung Naing</a></li>
+                <li><a href="javascript:void(0);">Thiha Lin</a></li>
+                <li><a href="javascript:void(0);">Sai Min</a></li>
+                <li><a href="javascript:void(0);">Zaw Htet</a></li>
+                <li><a href="javascript:void(0);">Soe Win</a></li>
+                <li><a href="javascript:void(0);">Myo Kyaw</a></li>
+                <li><a href="javascript:void(0);">Ye Naing</a></li>
+                <li><a href="javascript:void(0);">Htet Kyaw</a></li>
+                <li><a href="javascript:void(0);">Naing Htet</a></li>
+                <li><a href="javascript:void(0);">Min Hein</a></li>
+                <li><a href="javascript:void(0);">Kyaw Lin</a></li>
+                <li><a href="javascript:void(0);">Aung Aung</a></li>
+                <li><a href="javascript:void(0);">Hein Htet</a></li>
+                <li><a href="javascript:void(0);">Zaw Min</a></li>
+                <li><a href="javascript:void(0);">Soe Naing</a></li>
+                <li><a href="javascript:void(0);">Htet Aung</a></li>
+                <li><a href="javascript:void(0);">Min Min</a></li>
+                <li><a href="javascript:void(0);">Ye Min</a></li>
+                <li><a href="javascript:void(0);">Zaw Naing</a></li>
+                <li><a href="javascript:void(0);">Htet Hein</a></li>
+                <li><a href="javascript:void(0);">Myo Lin</a></li>
+                <li><a href="javascript:void(0);">Naing Min</a></li>
+                <li><a href="javascript:void(0);">Soe Lin</a></li>
+                <li><a href="javascript:void(0);">Hein Naing</a></li>
+                <li><a href="javascript:void(0);">Thiha Naing</a></li>
+                <li><a href="javascript:void(0);">Kyaw Htet</a></li>
+                <li><a href="javascript:void(0);">Zaw Lin</a></li>
+                <li><a href="javascript:void(0);">Min Zaw</a></li>
+                <li><a href="javascript:void(0);">Soe Min</a></li>
+                <li><a href="javascript:void(0);">Myo Naing</a></li>
+                <li><a href="javascript:void(0);">Thiha Aung</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const getbtn1 = document.getElementById('btn-1');
+        const getbtn2 = document.getElementById('btn-2');
+        const getbtn3 = document.getElementById('btn-3');
+        const getbtn4 = document.getElementById('btn-4');
+
+        const getinput = document.getElementById('search');
+        const getul = document.querySelector('ul');
+        const getli = getul.getElementsByTagName('li');
+        console.log(getli);
+        const getname = getul.textContent;
+        console.log(getname);
+
+        getinput.addEventListener('keyup',filter)
+
+        function filter(){
+            const filter = this.value.toLowerCase();
+            // console.log(filter);
+
+            if(getname.toLowerCase().indexOf(filter)>-1){
+                getli.style.display = "";
+            }else{
+                getli.style.display = "none";
+            }
+        }
+
+    </script>
+</body>
+</html>
