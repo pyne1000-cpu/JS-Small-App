@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos Gallery</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        .container{
+            width: 70%;
+            background-color: #f4f4f4;
+        }
+        .row{
+            /* background-color: black; */
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+        .row img{
+            width: 250px;
+            margin: 10px 0; 
+        }
+        .modal{
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            
+            position: fixed;
+
+            display: none;
+        }
+        .modal span{
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            
+            position: absolute;
+            top: 5px;
+            right: 20px;
+        }
+        .modal img,.modal p{
+            color: white;
+            width: 300px;
+            margin: auto;
+            margin-top: 10px;
+        }
+        .modal img{
+        display: block;
+        margin: auto;
+        margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <img src="./user/user1.jpg" alt="Image1" onclick="show(event)">
+            <img src="./user/user2.jpg" alt="Image2" onclick="show(event)">
+            <img src="./user/user3.jpg" alt="Image3" onclick="show(event)">
+            <img src="./user/user1.jpg" alt="Image4" onclick="show(event)">
+            <img src="./user/user2.jpg" alt="Image5" onclick="show(event)">
+            <img src="./user/user3.jpg" alt="Image6" onclick="show(event)">
+            <img src="./user/user1.jpg" alt="Image7" onclick="show(event)">
+            <img src="./user/user2.jpg" alt="Image8" onclick="show(event)">
+            <img src="./user/user3.jpg" alt="Image9" onclick="show(event)">
+        </div>
+    </div>
+    <!-- Modal Area -->
+     <div id="modal" class="modal">
+        <span id="cls-btn">&times;</span>
+        <img id="modal-img"src="" alt="">
+        <p id="modal-caption"></p>
+     </div>
+
+     <script>
+        const getrow = document.querySelectorAll('.row img');
+        console.log(getrow);
+        const getmodal = document.getElementById('modal');
+        const getmodalimg = document.getElementById('modal-img');
+        const getmodalcaption = document.getElementById('modal-caption')
+        const getclsbtn = document.getElementById('cls-btn');
+
+        // for(let i=0; i<getrow.length; i++){
+        //     getrow[i].addEventListener('click',function(e){
+        //         getmodal.style.display = "block";
+        //         // console.log(e.target.src);
+        //         getmodalimg.src = e.target.src;
+        //         getmodalcaption.innerText = e.target.alt;
+        //     })
+        // }
+        function show(et){
+            console.log(et.currentTarget);
+            getmodalimg.src = et.currentTarget.src;
+            getmodalcaption.innerText = et.currentTarget.alt;
+            getmodal.style.display = "block";
+        }
+        document.addEventListener('click',function(e){
+            if(e.target == getmodal){
+                getmodal.style.display = "none";
+            }
+        })
+        getclsbtn.addEventListener('click',function(){
+            getmodal.style.display = "none";
+        })
+     </script>
+</body>
+</html>
