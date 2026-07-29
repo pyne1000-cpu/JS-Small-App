@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorting & Searching</title>
 
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body{
+        body {
             height: 100vh;
             display: grid;
             place-items: center;
         }
 
-        .container{
+        .container {
             width: 500px;
             height: auto;
             background-color: #f4f4f4;
         }
-        .container form input{
+
+        .container form input {
             display: block;
             width: 90%;
 
             padding: 5px;
             margin: 20px;
         }
-        .container form input:focus{
-            outline: none;
-        }    
 
-        .container form button{
+        .container form input:focus {
+            outline: none;
+        }
+
+        .container form button {
             width: 40%;
             background-color: skyblue;
             color: #fff;
@@ -49,16 +52,18 @@
 
             opacity: .9;
         }
-        .container form button:hover{
+
+        .container form button:hover {
             opacity: 1;
         }
-        .container form button:active{
+
+        .container form button:active {
             transform: translateY(1px);
             box-shadow: 0 1px 2px #333;
             opacity: 1;
-        }   
+        }
 
-        .container .display{
+        .container .display {
             width: 90%;
             height: 300px;
             background-color: white;
@@ -68,21 +73,21 @@
             overflow-y: scroll;
         }
 
-        .container .display ul{
+        .container .display ul {
             list-style: none;
         }
 
-        .container .display ul li{
+        .container .display ul li {
             border-bottom: 1px solid #888;
             padding: 10px;
         }
 
-        .container .display ul li a{
+        .container .display ul li a {
             text-decoration: none;
         }
-
     </style>
 </head>
+
 <body>
     <div class="container">
         <form action="" method="">
@@ -177,54 +182,110 @@
         const getinput = document.getElementById('search');
         const getul = document.querySelector('ul');
         const getli = getul.getElementsByTagName('li');
-        
-        for(let x=0; x<getli.length;x++){
-            let getname = getli[x].textContent.toLowerCase();
-            console.log(getname);
 
-        getinput.addEventListener('keyup',filter);
 
-        function filter(){
+
+        getinput.addEventListener('keyup', filter);
+        getbtn1.addEventListener('click', sorting1);
+        getbtn2.addEventListener('click', sorting1);
+        getbtn3.addEventListener('click',atozm2);
+        getbtn4.addEventListener('click',ztoam2);
+
+
+        function filter() {
             const filter = this.value.toLowerCase();
             // console.log(filter);
-            
-                if(getname.toLowerCase().indexOf(filter)>-1){
+            for (let x = 0; x < getli.length; x++) {
+                let getname = getli[x].textContent.toLowerCase();
+                console.log(getname);
+                if (getname.toLowerCase().indexOf(filter) > -1) {
                     getli[x].style.display = "";
-                }else{
+                } else {
                     getli[x].style.display = "none";
                 }
             }
-            
+
         }
 
-        getbtn1.addEventListener('click',atozm1);
+        function sorting1() {
+            let atozli = [];
 
-        function atozm1(){
-            let atozli=[];
-
-            for(let i=0; i<getli.length;i++){
+            for (let i = 0; i < getli.length; i++) {
                 // console.log(getli[i]);
-                console.log(getli[i].innerText);
-
+                // console.log(getli[i].innerText);
                 atozli.push(getli[i].innerText);
-                atozli.sort();
             }
-            console.log(typeof(atozli));
 
-            let newli = document.createElement('li');
-            let newa = document.createElement('a');
+            if (this == getbtn1) {
+                atozli.sort();
+                console.log('btn1 working');
+            } else if (this == getbtn2) {
+                atozli.sort();
+                atozli.reverse();
+                console.log('btn2 working');
+            }
 
-            for(let y=0;y<atozli.length;y++){
-                console.log(y);
-                let atozname = atozli[y].innerText;
-                console.log(atozname);
-                // newa.appendChild();
-                // newli.appendChild(newa);
+            // console.log(typeof(atozli));
+            getul.innerHTML = "";
+
+            for (let y = 0; y < atozli.length; y++) {
+                let atozname = atozli[y];
+                // console.log(atozname);
+                let newli = document.createElement('li');
+                let newa = document.createElement('a');
+                newa.href = "javascript:void(0);"
+
+                // newa.appendChild(document.createTextNode(atozname)); or
+                newa.innerText = atozname;
+
+                newli.appendChild(newa);
                 // console.log(newli);
+
+                getul.appendChild(newli);
             }
 
         }
+
+       function atozm2() {
+            let loop = true;
+
+            while(loop){
+                loop = false;
+                let i = 0;
+                for(i;i<getli.length-1;i++){
+                    console.log(i);
+                    if(getli[i].textContent.toLocaleLowerCase() > getli[i+1].textContent.toLocaleLowerCase()){
+                        
+                        getli[i].parentElement.insertBefore(getli[i+1],getli[i])
+                        loop = true;
+                        break;
+                    
+                    }
+                }
+            }
+        }
+
+        function ztoam2() {
+            let loop = true;
+
+            while(loop){
+                loop = false;
+                let i = 0;
+                for(i;i<getli.length-1;i++){
+                    console.log(i);
+                    if(getli[i].textContent.toLocaleLowerCase() < getli[i+1].textContent.toLocaleLowerCase()){
+                        
+                        getli[i].parentElement.insertBefore(getli[i+1],getli[i])
+                        loop = true;
+                        break;
+                    
+                    }
+                }
+            }
+        }
+
 
     </script>
 </body>
+
 </html>
