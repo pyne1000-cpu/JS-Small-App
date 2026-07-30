@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        .container{
+            width: 400px;
+            min-height: 400px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container h3{
+            border-bottom: 1px dashed #777;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .container small{
+            display: block;
+            text-align: center;
+        }
+        .container form input{
+            width: 90%;
+            margin: 20px 15px;
+            padding: 8px;
+            outline: none;
+        }
+        .display{
+            width: 100%;
+            height: 200px;
+
+            overflow-y: scroll;
+        }
+        .display ul{
+            list-style: none;
+        }
+        .display ul li{
+            background-color: #f9f9f9;
+            border: 1px solid #fff;
+            padding: 10px;
+            /* margin-top: -1px; အလုပ်မဖြစ်ပါ*/ 
+            cursor: pointer;
+        }
+        .display ul li.completed{
+            font-style: italic;
+            text-decoration: line-through;
+            opacity: .6;
+        }    
+        .display ul li.completed::after{
+            content: "Done";
+
+            float: right;
+        }    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>My To Do List</h3>
+        <small>left click to complete & right click to delete.</small>
+        <form action="" method="">
+            <input type="text" name="textbox" id="textbox" placeholder="Enter your tasks" autocomplete="off" autofocus>
+        </form>
+        <div class="display">
+            <ul>
+                <!-- <li class="completed">Dopamine Detox</li>
+                <li>Programming,Computer Science and AI</li> -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const getform = document.querySelector('form')
+        const getinput = document.getElementById('textbox');
+        const getul = document.querySelector('ul');
+        // console.log(getul);
+
+        getform.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            addnew();
+        })
+
+        const getlocaldbs = JSON.parse(localStorage.getItem('todos'));
+        console.log(getlocaldbs);
+
+        if(getlocaldbs){
+            getlocaldbs.forEach(getlocaldb => addnew(getlocaldb));
+        }
+
+        function addnew(fromdb){
+            let todotext = getinput.value;
+
+            if(fromdb){
+                todotext = fromdb.text;
+            }
+
+            if(todotext){
+                const newli = document.createElement('li');
+                if(fromdb && fromdb.done){
+                    newli.classList.add('completed');
+                }
+                newli.appendChild(document.createTextNode(todotext));
+                getul.appendChild(newli);
+                getinput.value = "";
+                
+                updateLocalStorage();
+
+                newli.addEventListener('click',(e)=>{
+                    newli.classList.toggle('completed');
+                    updateLocalStorage();
+                })
+
+                newli.addEventListener('contextmenu',(e)=>{
+                    e.preventDefault();
+                    newli.remove();
+                    updateLocalStorage();
+                })
+
+            }
+        }
+
+        function updateLocalStorage(){
+            const getalllis = getul.querySelectorAll('li');
+            const todos = [];
+            getalllis.forEach(li=>{
+                todos.push({
+                    text:li.textContent,
+                    done:li.classList.contains('completed')
+                });
+            })
+            // console.log(todos);
+            localStorage.setItem('todos',JSON.stringify(todos));
+        }
+    </script>
+</body>
+</html>
