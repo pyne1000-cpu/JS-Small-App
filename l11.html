@@ -51,6 +51,7 @@
         .btn-box {
             display: flex;
             justify-content: end;
+            /* margin-bottom: 10px; */
         }
 
         .btn {
@@ -62,11 +63,12 @@
             border-radius: 3px;
         }
 
-        span {
+        .emcontainer span {
+            display: inline-block;
             background-color: rgb(10, 87, 149);
             color: #c0bebe;
             padding: 5px 10px;
-            /* border-radius: 3px; */
+            margin: 10px 10px 0 0;
         }
     </style>
 </head>
@@ -80,9 +82,12 @@
             <div class="btn-box">
                 <button class="btn">Send</button>
             </div>
-            <!-- <span>Sample One</span>
-            <span>Sample Two</span>
-            <span>Sample Three</span> -->
+            <div class="emcontainer">
+                <span>Sample One</span>
+                <span>Sample Two</span>
+                <span>Sample Three</span>
+                <span>Sample Four</span>
+            </div>
         </form>
     </div>
 
@@ -90,6 +95,7 @@
         const getinput = document.getElementById('emails');
         const getmessage = document.getElementById('message');
         const getbtn = document.querySelector('.btn');
+        const getemcontainer = document.querySelector('.emcontainer')
 
         getinput.focus();
 
@@ -106,33 +112,39 @@
             // console.log(eitems);
 
             // remove empty and space
-            const eitems = inputtext.split(',').filter(rmempty => rmempty.trim() !== '');
+            const eitems = inputtext.split(',').filter(rmempty => rmempty.trim() !== '').map(rmtxtempty => rmtxtempty.trim());
             // console.log(eitems);
 
-            const finallist = [];
+            getemcontainer.innerHTML = "";
 
             eitems.forEach(function (eitem) {
                 console.log(eitem);
 
                 const newspan = document.createElement('span');
                 newspan.textContent = eitem;
+                newspan.classList.add('email');
                 console.log(newspan);
-
-
-                getbtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    finallist.push({
-                        email: eitem,
-                        message: getmessage.value
-                    })
-                    console.log(finallist);
-                })
-
+                getemcontainer.appendChild(newspan);
             })
         }
 
+        getbtn.addEventListener('click',function(e){
+            e.preventDefault();
+            send();
+        })
+        const finallist = [];
 
-
+        function send(){
+            const getallemails = document.querySelectorAll('.email');
+            console.log(getallemails);
+            getallemails.forEach(function(getemail){
+                finallist.push({
+                    email:getemail,
+                    message:getmessage.value
+                })
+            })
+            console.log(finallist);
+        }
     </script>
 </body>
 
