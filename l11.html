@@ -51,7 +51,6 @@
         .btn-box {
             display: flex;
             justify-content: end;
-            /* margin-bottom: 10px; */
         }
 
         .btn {
@@ -83,10 +82,10 @@
                 <button class="btn">Send</button>
             </div>
             <div class="emcontainer">
-                <span>Sample One</span>
+                <!-- <span>Sample One</span>
                 <span>Sample Two</span>
                 <span>Sample Three</span>
-                <span>Sample Four</span>
+                <span>Sample Four</span> -->
             </div>
         </form>
     </div>
@@ -117,6 +116,8 @@
 
             getemcontainer.innerHTML = "";
 
+            console.log(eitems);
+
             eitems.forEach(function (eitem) {
                 console.log(eitem);
 
@@ -132,6 +133,7 @@
             e.preventDefault();
             send();
         })
+
         const finallist = [];
 
         function send(){
@@ -139,7 +141,7 @@
             console.log(getallemails);
             getallemails.forEach(function(getemail){
                 finallist.push({
-                    email:getemail,
+                    email:getemail.textContent,
                     message:getmessage.value
                 })
             })
