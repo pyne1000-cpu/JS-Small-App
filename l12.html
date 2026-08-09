@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+
+    <style>
+        :root{
+
+        }
+        body{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        .map-container{
+            width: 1200px;
+            height: 800px;
+            background-image: url(https://www.freeiconspng.com/uploads/elegant-world-map-image-png-33.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            border: 1px solid  rgba(0, 0, 0, .2);
+
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+
+            position: relative;
+        }
+        .circle{
+            width: 20px;
+            height: 20px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 50%;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            opacity: 0;
+
+            animation: small 2s infinite;
+
+            z-index: 3;
+
+            transform: scale(0);
+        }
+        .circle::before,.circle::after{
+            content: "";
+
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            opacity: 0;
+            
+        }
+        .circle::before{
+            background-color: rgb(69, 206, 69);
+            animation: medium 2s infinite;
+            z-index: -1;   
+        }
+        .circle::after{
+            background-color: yellow;
+            animation: large 2s infinite;
+            z-index: -2;
+        }
+
+        @keyframes small{
+         to{
+            transform: scale(1);
+            opacity: 1;
+         }
+        }
+        @keyframes medium{
+         to{
+            transform: scale(1.5);
+            opacity: 1;
+         }
+        }
+        @keyframes large{
+         to{
+            transform: scale(2);
+            opacity: 1;
+         }   
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <select id="small-color">
+                <option selected disabled>Small Color</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="white">Whtie</option>
+                <option value="skyblue">Skyblue</option>
+                <option value="violet">Violet</option>
+                <option value="steelblue">SteelBlue</option>
+                <option value="yellow">Yellow</option>
+                <option value="pink">Pink</option>
+                <option value="cyan">Cyan</option>
+            </select>
+            <select id="medium-color">
+                <option selected disabled>Mediun Color</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="white">Whtie</option>
+                <option value="skyblue">Skyblue</option>
+                <option value="violet">Violet</option>
+                <option value="steelblue">SteelBlue</option>
+                <option value="yellow">Yellow</option>
+                <option value="pink">Pink</option>
+                <option value="cyan">Cyan</option>
+            </select>
+            <select id="large-color">
+                <option selected disabled>Large Color</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="white">Whtie</option>
+                <option value="skyblue">Skyblue</option>
+                <option value="violet">Violet</option>
+                <option value="steelblue">SteelBlue</option>
+                <option value="yellow">Yellow</option>
+                <option value="pink">Pink</option>
+                <option value="cyan">Cyan</option>
+            </select>
+        </div>
+        <div class="map-container">
+            <span class="circle"></span>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+</html>
