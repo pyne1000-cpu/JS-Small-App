@@ -34,8 +34,10 @@
             border-radius: 50%;
 
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
+
+            /* transform: translate(-50%,-50%); */
 
             opacity: 0;
 
@@ -43,7 +45,6 @@
 
             z-index: 3;
 
-            transform: scale(0);
         }
         .circle::before,.circle::after{
             content: "";
@@ -53,8 +54,10 @@
             border-radius: 50%;
 
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%,-50%);
 
             opacity: 0;
             
@@ -139,6 +142,25 @@
     </div>
 
     <script>
+        const getsmallcolor = document.getElementById('small-color');
+        const getmediumcolor = document.getElementById('medium-color');
+        const getlargecolor = document.getElementById('large-color');
+        const getmapcontainer = document.querySelector('.map-container');
+
+        getmapcontainer.addEventListener('click',function(e){
+            if(e.target.classList.contains('map-container')){
+                const xoffset = e.offsetX;
+                const yoffset = e.offsetY;
+                console.log(xoffset);
+                console.log(yoffset);
+
+                const newspan = document.createElement('span');
+                newspan.classList.add('circle');
+                newspan.style.top = `${yoffset}px`;
+                newspan.style.left = `${xoffset}px`;
+                getmapcontainer.appendChild(newspan);
+            }
+        })
 
     </script>
 </body>
