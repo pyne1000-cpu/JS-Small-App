@@ -7,16 +7,21 @@
 
     <style>
         :root{
-
+            --smallcolor : #fff;
+            --mediumcolor : #aaa;
+            --largecolor : #0f0f0f;
         }
         body{
             height: 100vh;
             display: grid;
             place-items: center;
+
+            padding: 0;
+            margin: 0;
         }
         .map-container{
-            width: 1200px;
-            height: 800px;
+            width: 1000px;
+            height: 700px;
             background-image: url(https://www.freeiconspng.com/uploads/elegant-world-map-image-png-33.png);
             background-repeat: no-repeat;
             background-position: center;
@@ -30,18 +35,18 @@
         .circle{
             width: 20px;
             height: 20px;
-            background-color: rgb(255, 255, 255);
+            background-color: var(--smallcolor);
             border-radius: 50%;
 
             position: absolute;
             top: 50%;
             left: 50%;
 
-            /* transform: translate(-50%,-50%); */
+            transform: translate(-50%,-50%);
 
             opacity: 0;
 
-            animation: small 2s infinite;
+            animation: small 1s infinite;
 
             z-index: 3;
 
@@ -63,31 +68,31 @@
             
         }
         .circle::before{
-            background-color: rgb(69, 206, 69);
-            animation: medium 2s infinite;
+            background-color: var(--mediumcolor);
+            animation: medium 1s infinite;
             z-index: -1;   
         }
         .circle::after{
-            background-color: yellow;
-            animation: large 2s infinite;
+            background-color: var(--largecolor);
+            animation: large 1s infinite;
             z-index: -2;
         }
 
         @keyframes small{
          to{
-            transform: scale(1);
+            transform:translate(-50%,-50%) scale(1);
             opacity: 1;
          }
         }
         @keyframes medium{
          to{
-            transform: scale(1.5);
+            transform:translate(-50%,-50%) scale(1.5);
             opacity: 1;
          }
         }
         @keyframes large{
          to{
-            transform: scale(2);
+            transform:translate(-50%,-50%) scale(2);
             opacity: 1;
          }   
         }
@@ -158,8 +163,15 @@
                 newspan.classList.add('circle');
                 newspan.style.top = `${yoffset}px`;
                 newspan.style.left = `${xoffset}px`;
-                getmapcontainer.appendChild(newspan);
+
+                if(getsmallcolor.selectedIndex > 0 || getmediumcolor.selectedIndex > 0 || getlargecolor.selectedIndex >0){
+                    newspan.style.setProperty('--smallcolor',getsmallcolor.value);
+                    newspan.style.setProperty('--mediumcolor',getmediumcolor.value);
+                    newspan.style.setProperty('--largecolor',getlargecolor.value);
+                }
+                this.appendChild(newspan);
             }
+            
         })
 
     </script>
