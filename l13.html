@@ -37,7 +37,7 @@
 
             object-fit: cover;
         }
-        .img-box img:hover{
+        .img-box img:hover,.answer:checked + label img{
             box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
             transform: scale(1.1);
         }
@@ -67,18 +67,111 @@
 </head>
 <body>
     <div class="container">
-        <h3 class="question">Question?</h3>
+        <h3 class="question"></h3>
         <div class="img-box">
-            <input type="radio" id="a" class=""><label for="a"><img src="./img/img_a.jpg" alt="" id="img-a"></label>
-            <input type="radio" id="b" class=""><label for="b"><img src="./img/img_b.jpg" alt="" id="img-b"></label>
-            <input type="radio" id="c" class=""><label for="c"><img src="./img/img_c.jpg" alt="" id="img-c"></label>
-            <input type="radio" id="d" class=""><label for="d"><img src="./img/img_d.jpg" alt="" id="img-d"></label>
+            <input type="radio" id="1" class="answer"><label for="1"><img src="" alt="" id="img-a"></label>
+            <input type="radio" id="2" class="answer"><label for="2"><img src="" alt="" id="img-b"></label>
+            <input type="radio" id="3" class="answer"><label for="3"><img src="" alt="" id="img-c"></label>
+            <input type="radio" id="4" class="answer"><label for="4"><img src="" alt="" id="img-d"></label>
         </div>
-        <button class="btn">Next</button>
+        <button type="button" class="btn">Next</button>
     </div>
 
     <script>
-        const geta = document.getElementById('a');
+        
+        const database = [
+            {question:"Show Mountain",
+             1:"./img/img_a.jpg",   
+             2:"./img/img_b.jpg",   
+             3:"./img/img_c.jpg",   
+             4:"./img/img_d.jpg",   
+             correct:"2"   
+
+            },
+            {question:"Show Ooe",
+             1:"./img/img_c.jpg",   
+             2:"./img/img_d.jpg",   
+             3:"./img/img_b.jpg",   
+             4:"./img/img_a.jpg", 
+             correct:"2"   
+            },
+            {question:"Choose Bulb",
+             1:"./img/img_d.jpg",   
+             2:"./img/img_c.jpg",   
+             3:"./img/img_a.jpg",   
+             4:"./img/img_b.jpg",  
+             correct:"3"   
+            },
+            {question:"Choose Air",
+             1:"./img/img_b.jpg",   
+             2:"./img/img_d.jpg",   
+             3:"./img/img_a.jpg",   
+             4:"./img/img_c.jpg",
+             correct:"4"   
+            }
+        ];
+
+        const getcontainer = document.querySelector('.container'), 
+             getquestion = document.querySelector('.question'),
+             getinputs = document.querySelectorAll('.answer'),
+             getbtn = document.querySelector('.btn'),
+             getimga = document.getElementById('img-a'),
+             getimgb = document.getElementById('img-b'),
+             getimgc = document.getElementById('img-c'),
+             getimgd = document.getElementById('img-d');
+
+            let curidx = 0,
+                score = 0;
+        function showquestion(){
+            getinputs.forEach((getinput)=>{
+                getinput.checked = false;
+            })
+            getquestion.textContent = database[curidx].question;
+
+            getimga.src = database[curidx][1];
+            getimgb.src = database[curidx][2];
+            getimgc.src = database[curidx][3];
+            getimgd.src = database[curidx][4];
+            
+        }    
+        
+        showquestion();
+
+        function getsingleinput(){
+            let getinputid;
+            getinputs.forEach(function(getinput){
+                // console.log(getinput);
+                if(getinput.checked){
+                        // console.log(getinput.id);
+                        getinputid = getinput.id;
+                    }  
+            })
+            return getinputid;
+        }
+        
+        getbtn.addEventListener('click',function(e){
+            const chosen = getsingleinput();
+            // console.log(chosen);  
+            
+            if(chosen){
+                if(chosen === database[curidx].correct){
+                    score++;
+                }
+                curidx++;
+
+                if(curidx<database.length){
+                    showquestion()
+                }else{
+                    getcontainer.innerHTML = `
+                        <h3>Your Score is ${score}</h3>
+                        <button type="button" class="btn" ondblclick="window.location.reload();">Double Click to Reload</button>
+                        `
+                }
+
+            }else{
+                    window.alert("Please choose one picture");
+                } 
+        })
     </script>
 </body>
 </html>
