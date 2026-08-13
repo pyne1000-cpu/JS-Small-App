@@ -164,7 +164,8 @@
                 }else{
                     getcontainer.innerHTML = `
                         <h3>Your Score is ${score}</h3>
-                        <button type="button" class="btn" ondblclick="window.location.reload();">Double Click to Reload</button>
+                       <!-- <button type="button" class="btn" ondblclick="window.location.reload();">Double Click to Reload</button> -->
+                        <button type="button" class="btn" onclick="doubleclick();">Double Click to Reload</button>
                         `
                 }
 
@@ -172,6 +173,25 @@
                     window.alert("Please choose one picture");
                 } 
         })
+
+        //doubleclick function create manually
+        let clicktime = 0;
+        function doubleclick(){
+            console.log('doubelclick fun working')
+            console.log(clicktime);
+           if(clicktime === 0){
+            clicktime = Date.now();
+           }else if((Date.now() - clicktime) < 1000){
+            window.location.reload();
+           }else{
+
+           // clicktime = 0; //need to click three time
+
+            clicktime = Date.now(); //only double click
+           }
+            
+
+        }
     </script>
 </body>
 </html>
