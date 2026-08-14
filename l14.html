@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Card</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 100vh;
+            background-color: #000;
+            display: grid;
+            place-items: center;
+        }
+        .container{
+            background: linear-gradient(360deg,#000,#333);
+        }
+        .visa-card{
+            width: 400px;
+            background: rgba(255, 255, 255, .1);
+        }
+        .visa-card .input{
+            color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="visa-card">
+            <div class="logo">
+                <img src="https://images.seeklogo.com/logo-png/61/3/visa-logo-png_seeklogo-616773.png" alt="" style="width: 100px; margin-left: 20px;">
+            </div>
+            <form action="" method="" class="form-group">
+                <div class="card-code input">
+                    <label for="">Card Number</label>
+                    <input type="text">
+                </div>
+                <div class="card-holder input">
+                    <label for=""></label>
+                    <input type="text">
+                </div>
+                <div class="exp input">
+                    <label for="">Exp Date</label>
+                    <input type="text">
+                </div>
+                <div class="ccv input">
+                    <label for="">CCV</label>
+                    <input type="text">
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+
+    </script>
+</body>
+</html>
