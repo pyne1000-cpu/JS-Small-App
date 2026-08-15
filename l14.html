@@ -19,13 +19,41 @@
         }
         .container{
             background: linear-gradient(360deg,#000,#333);
+            border-radius: 20px;
         }
         .visa-card{
             width: 400px;
             background: rgba(255, 255, 255, .1);
+            border-radius: 20px;
         }
-        .visa-card .input{
+        .visa-card .inputs{
             color: #f4f4f4;
+            border: 1px solid #f4f4f4;
+            margin: 0 40px;
+        }
+        .visa-card .inputs[id="card-code"]{
+            font-size: 20px;
+            width: 100%;
+        }
+        .visa-card input{
+            display: block;
+            background: none;
+            color: #f4f4f4;
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+        }
+        .visa-card input:hover,.visa-card input:focus{
+
+        }
+        .visa-card input[id="one"]{
+            font-size: 18px;
+        }
+        .visa-card span{
+            width: 100%;
+            border-bottom: 1px solid #f4f4f4;
+            
+            position: absolute;
         }
     </style>
 </head>
@@ -36,21 +64,25 @@
                 <img src="https://images.seeklogo.com/logo-png/61/3/visa-logo-png_seeklogo-616773.png" alt="" style="width: 100px; margin-left: 20px;">
             </div>
             <form action="" method="" class="form-group">
-                <div class="card-code input">
+                <div id="card-code" class="card-code inputs">
                     <label for="">Card Number</label>
-                    <input type="text">
+                    <input type="text" id="one" placeholder="1234 1234 1234 1234" maxlength="20">
+                    <span></span>
                 </div>
-                <div class="card-holder input">
-                    <label for=""></label>
+                <div id="card-holder" class="card-holder inputs">
+                    <label for="">Card Holder Name</label>
                     <input type="text">
+                    <span></span>
                 </div>
-                <div class="exp input">
+                <div id="exp" class="exp inputs">
                     <label for="">Exp Date</label>
                     <input type="text">
+                    <span></span>
                 </div>
-                <div class="ccv input">
+                <div id="ccv" class="ccv inputs">
                     <label for="">CCV</label>
                     <input type="text">
+                    <span></span>
                 </div>
             </form>
         </div>
