@@ -132,7 +132,20 @@
     </div>
     
     <script>
-
+        const getallinputs = document.querySelectorAll('input');
+        const getallvalue = [];
+        getallinputs.forEach((getinput)=>{
+            // console.log(getinput);
+            getinput.addEventListener('keyup',function(){
+                getallvalue.push({
+                    cardcode:getallinputs[0].value,
+                    cardname:getallinputs[1].value,
+                    cardexp:getallinputs[2].value,
+                    cardccv:getallinputs[3].value
+                });
+                console.log(getallvalue[getallvalue.length-1]);
+            })
+        })      
     </script>
 </body>
 </html>
