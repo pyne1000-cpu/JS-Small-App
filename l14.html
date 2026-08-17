@@ -32,22 +32,19 @@
         .visa-card .inputs{
             color: #f4f4f4;
             /* border: 1px solid #f4f4f4; */
-            /* margin: 0 40px; */
             padding: 5px;
             position: relative;
             overflow: hidden;
-
         }
         .visa-card .inputs[id="card-code"]{
             font-size: 18px;
-            /* width: 100%; */
 
             margin-bottom: 10px;
         }
         .visa-card input{
             display: block; 
-            /* background: none; */
-            /* color: #f4f4f4; */
+            background: none;
+            color: #f4f4f4;
             border: none;
             outline: none;
             padding: 10px 10px 1px 10px;
@@ -58,7 +55,6 @@
         }
         .visa-card input[id="two"]{
             width: 30ch;
-            background-color: red;
         }
         .visa-card input[id="three"]{
             width: 15ch;
@@ -67,7 +63,6 @@
             width: 8ch;
         }
         .visa-card span{
-            width: 100%;
             height: 2px;
             background-color:  #f4f4f4;
             
@@ -80,26 +75,22 @@
             width: 36ch;
         }
         .visa-card span[id="b"]{
-            width: 28ch;
+            width: 80%;
         }
         .visa-card span[id="c"]{
             width: 15ch;
         }
         .visa-card span[id="d"]{
-            width: 36ch;
+            width: 7ch;
         }
-        
         .visa-card .div-gp{
             display: flex;
             justify-content: space-evenly;
-
-            /* margin-bottom: 20px; */
         }
         .visa-card .div-gp label{
             font-size: 18px;
         }
         .visa-card .div-gp input{
-            /* padding: 5px; */
             font-size: 18px;
         }
         .visa-card input:hover + span,.visa-card input:focus ~ span{
@@ -122,7 +113,7 @@
                 <div class="div-gp">
                     <div id="card-holder" class="card-holder inputs">
                         <label for="two">Card Holder Name</label>
-                        <input type="text" id="two" placeholder="Name" maxlength="25">
+                        <input type="text" id="two" placeholder="Name" maxlength="20">
                         <span id="b"></span>
                     </div>
                     <div id="exp" class="exp inputs">
