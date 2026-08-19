@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Effect</title>
+
+    <style>
+        body{
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 1),rgba(0, 0, 0, .5));
+            color: #fff;
+            display: grid;
+            place-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        span#text{
+            animation: mycursor 1s infinite;
+        }
+        @keyframes mycursor{
+            from{
+                border: none;
+            }
+            to{
+                border-right: 2px solid #bbb;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>We build with <span id="text"></span> Framework.</h1>
+        <h3>Start integrate with your bussiness and app</h3>
+        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+    </div>
+
+    <script>
+        const getspan = document.getElementById('text');
+
+const languages = ['NodeJS', 'ReactJS', 'VueJS', 'Laravel'];
+const colors = ['red', 'skyblue', 'violet', 'yellow'];
+
+//         // ** GPT Code Test **
+// let languageIndex = 0;
+// let letterIndex = 0;
+
+// function showtxt() {
+
+//     const language = languages[languageIndex];
+
+//     // Add one letter
+//     getspan.textContent = language.slice(0, letterIndex + 1);
+//     getspan.style.color = colors[languageIndex];
+
+//     letterIndex++;
+
+//     if(letterIndex > language.length){
+//         getspan.textContent = '';
+//         languageIndex++;
+
+//         if(languageIndex >= languages.length){
+//         languageIndex = 0;
+//     }
+//     letterIndex = 0;
+//     }
+// }
+
+// const repeatfun = setInterval(showtxt,500);  
+
+    </script>
+</body>
+</html>
