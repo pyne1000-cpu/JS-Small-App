@@ -26,6 +26,18 @@
                 border-right: 2px solid #bbb;
             }
         }
+        .red{
+            color: red;
+        }
+        .skyblue{
+            color: skyblue;
+        }
+        .violet{
+            color: violet;
+        }
+        .yellow{
+            color: yellow;
+        }
     </style>
 </head>
 <body>
@@ -40,6 +52,7 @@
 
         const languages = ['NodeJS', 'ReactJS', 'VueJS', 'Laravel'];
         const colors = ['red', 'skyblue', 'violet', 'yellow'];
+
         function* genfun(){
             let idx = 0;
             while(true){
@@ -74,10 +87,41 @@
         showtxt(languages[keygen.next().value]);
 
         function showtxt(word){
-            // console.log(word);
-            for(let i=0;i<word.length;i++){
-                getspan.textContent += word[i];
-            }
+            // console.log(word); 
+            getspan.textContent = ""
+            getspan.classList.add(colors[languages.indexOf(word)])
+            let x = 0;
+
+            let repeatfun = setInterval(function(){
+                if(x>=word.length){
+                    clearInterval(repeatfun);
+                    deletetxt()
+                }else{
+                    getspan.textContent += word[x];
+                    x++;
+                }
+            },300)
+        }
+
+        function deletetxt(){
+            let getword = getspan.textContent;
+            // console.log(getword);
+
+            let idx = getword.length-1;
+            // console.log(idx);
+
+            const repeatdel = setInterval(function(){
+                if(idx<0){
+                    clearInterval(repeatdel);
+                    // getspan.className = '';
+                    // getspan.removeAttribute('class');
+                    getspan.classList.remove(colors[languages.indexOf(getword)]);
+                    showtxt(languages[keygen.next().value]);
+                }else{
+                    getspan.textContent = getword.substring(0,idx);
+                    idx--;
+                }
+            },300)
         }
 
 
@@ -101,7 +145,7 @@
 
 //         if(languageIndex >= languages.length){
 //         languageIndex = 0;
-//     }
+//         }
 //     letterIndex = 0;
 //     }
 // }
