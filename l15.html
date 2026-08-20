@@ -38,8 +38,48 @@
     <script>
         const getspan = document.getElementById('text');
 
-const languages = ['NodeJS', 'ReactJS', 'VueJS', 'Laravel'];
-const colors = ['red', 'skyblue', 'violet', 'yellow'];
+        const languages = ['NodeJS', 'ReactJS', 'VueJS', 'Laravel'];
+        const colors = ['red', 'skyblue', 'violet', 'yellow'];
+        function* genfun(){
+            let idx = 0;
+            while(true){
+                yield idx;
+                idx++;               
+                if(idx >= 4){
+                idx = 0
+                }
+            }
+            
+        }
+        const keygen = genfun();
+
+        // console.log(keygen.next());
+        // console.log(keygen.next());
+        // console.log(keygen.next());
+        // console.log(keygen.next());
+        // console.log(keygen.next());
+        // console.log(keygen.next());
+
+        // console.log(languages[keygen.next().value]);
+        // console.log(languages[keygen.next().value]);
+        // console.log(languages[keygen.next().value]);
+        // console.log(languages[keygen.next().value]);
+        // console.log(languages[keygen.next().value]);
+        // console.log(languages[keygen.next().value]);
+        // console.log(languages[keygen.next().value]);
+        // console.log(languages[keygen.next().value]);
+        // console.log(languages[keygen.next().value]);
+        // console.log(languages[keygen.next().value]);
+
+        showtxt(languages[keygen.next().value]);
+
+        function showtxt(word){
+            // console.log(word);
+            for(let i=0;i<word.length;i++){
+                getspan.textContent += word[i];
+            }
+        }
+
 
 //         // ** GPT Code Test **
 // let languageIndex = 0;
