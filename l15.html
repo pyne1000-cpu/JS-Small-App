@@ -113,9 +113,11 @@
             const repeatdel = setInterval(function(){
                 if(idx<0){
                     clearInterval(repeatdel);
+                    
                     // getspan.className = '';
                     // getspan.removeAttribute('class');
                     getspan.classList.remove(colors[languages.indexOf(getword)]);
+
                     showtxt(languages[keygen.next().value]);
                 }else{
                     getspan.textContent = getword.substring(0,idx);

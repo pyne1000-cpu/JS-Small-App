@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        .player{
+            display: flex;
+            width: 600px;
+            flex-direction: row;
+            justify-content: space-evenly;
+            background-color: #1b1a1a;
+            color: #f4f4f4;
+            padding: 20px;
+        }
+        .progress{
+            width: 300px;
+            height: 10px;
+            background-color: rgb(243, 11, 11);
+
+            border-radius: 24px;
+            margin: 4px 3px 3px 10px;
+        }
+        .progress-bar{
+            width: 50%;
+            height: 100%;
+            background-color: #f4f4f4;
+            border-radius: 24px 0 0 24px;
+
+        }
+        .volume{
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="player">
+            <div class="prev">
+                <i class="fa-solid fa-backward"></i>
+            </div>
+            <div class="play">
+                <i class="fa-solid fa-play"></i>
+            </div>
+            <div class="next">
+                <i class="fa-solid fa-forward"></i>
+            </div>
+            <div class="reload">
+                <i class="fa-solid fa-rotate-right"></i>
+            </div>
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+            <span>2:22</span>
+
+            <div class="volume">
+                <i class="fa-solid fa-volume"></i>
+                <div class="volume-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+</html>
