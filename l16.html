@@ -19,7 +19,7 @@
         }
         .player{
             display: flex;
-            width: 600px;
+            width: 700px;
             flex-direction: row;
             justify-content: space-evenly;
             background-color: #1b1a1a;
@@ -29,52 +29,160 @@
         .progress{
             width: 300px;
             height: 10px;
-            background-color: rgb(243, 11, 11);
+            background-color: #f4f4f4;
 
             border-radius: 24px;
             margin: 4px 3px 3px 10px;
+
+            overflow: hidden;
         }
         .progress-bar{
-            width: 50%;
+            width: 0%;
             height: 100%;
-            background-color: #f4f4f4;
+            background-color: rgb(243, 11, 11);
             border-radius: 24px 0 0 24px;
-
         }
         .volume{
-            margin-left: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="player">
-            <div class="prev">
+            <audio src="" id="audioscreen" class="audioscreen"></audio>
+            <div id="prev" class="prev">
                 <i class="fa-solid fa-backward"></i>
             </div>
-            <div class="play">
+            <div id="play" class="play">
                 <i class="fa-solid fa-play"></i>
             </div>
-            <div class="next">
+            <div id="next" class="next">
                 <i class="fa-solid fa-forward"></i>
             </div>
-            <div class="reload">
+            <div id="reload" class="reload">
                 <i class="fa-solid fa-rotate-right"></i>
             </div>
             <div class="progress">
                 <div class="progress-bar"></div>
             </div>
-            <span>2:22</span>
+            <span class="time">00:00/00:00</span>
 
-            <div class="volume">
+            <div>
                 <i class="fa-solid fa-volume"></i>
-                <div class="volume-bar"></div>
+                <input type="range" name="volume" id="volume" class="volume" min="0" max="100" value="100"> 
             </div>
-        </div>
+        </div>    
     </div>
 
     <script>
+        const getaudioscreen = document.getElementById('audioscreen');
+        const playbtn = document.getElementById('play'),
+              prevbtn = document.getElementById('prev'),
+              nextbtn = document.getElementById('next'),
+              reloadbtn = document.getElementById('reload');
 
+        // console.log(playbtn.querySelector('i.fa-solid'));
+
+        const getprogress = document.querySelector('.progress'),
+              getprogressbar = document.querySelector('.progress-bar');
+
+        const gettime = document.querySelector('.time'); 
+
+        const getvolume = document.querySelector('#volume');
+
+        // getaudioscreen.addEventListener('play',playaudio);
+        getaudioscreen.addEventListener('timeupdate',updateprogressbar);
+        getaudioscreen.addEventListener('play',playaudio);
+        getaudioscreen.addEventListener('pause',pauseaudio);
+        playbtn.addEventListener('click',playorpause);  
+        prevbtn.addEventListener('click',prev);    
+        nextbtn.addEventListener('click',next);    
+        reloadbtn.addEventListener('click',reloadaudio);    
+        getvolume.addEventListener('click',function(){
+            console.log(this.value);
+            getaudioscreen.volume = this.value/100;
+        })
+        getprogress.addEventListener('click',progressbarcontrol);
+
+        const songs = ['sample1','sample2','sample3'];
+        let idx = 0;
+
+        loadaudio(songs[idx]);
+        // console.log(songs[idx]);
+        
+        function loadaudio(audio){
+            getaudioscreen.src = `./source/${audio}.mp3`
+        }
+
+        function playorpause(){
+            console.log('play or pause');
+            if(getaudioscreen.paused){
+                playaudio();
+            }else{
+                pauseaudio();
+            }
+        }      
+
+        function playaudio(){
+            // console.log('play');
+            playbtn.querySelector('i').classList.remove('fa-play');
+            playbtn.querySelector('i').classList.add('fa-pause');
+            getaudioscreen.play();
+        }
+
+        function pauseaudio(){
+            console.log('pause');
+            playbtn.querySelector('i').classList.remove('fa-pause');
+            playbtn.querySelector('i').classList.add('fa-play');
+            getaudioscreen.pause();
+        }
+        
+        function prev(){
+            idx--;
+            if(idx<0){
+                idx = songs.length-1;
+            }
+            loadaudio(songs[idx]);
+            playaudio();
+        }      
+        
+        function next(){
+            idx++;
+            if(idx>songs.length-1){
+                idx = 0;
+            }
+            loadaudio(songs[idx]);
+            playaudio();
+        }      
+
+        function reloadaudio(){
+            // getaudioscreen.load();
+            getaudioscreen.currentTime = 0;
+            getprogressbar.style.width = `${getaudioscreen.currentTime}%`;
+            // pauseaudio();
+        }      
+
+        function updateprogressbar(){
+            // console.log(Math.floor(`${(300/getaudioscreen.duration)*getaudioscreen.currentTime}`));
+            getprogressbar.style.width = `${(300/getaudioscreen.duration)*getaudioscreen.currentTime}px`;
+            const curmin = Math.floor(getaudioscreen.currentTime / 60),
+                  cursec = Math.floor(getaudioscreen.currentTime % 60),
+                  totalmin = Math.floor(getaudioscreen.duration / 60),
+                  totalsec = Math.floor(getaudioscreen.duration % 60);
+            gettime.textContent = `${curmin.toString().padStart(2,'0')}:${cursec.toString().padStart(2,'0')}/${totalmin.toString().padStart(2,'0')}:${totalsec.toString().padStart(2,'0')}`;
+        }
+
+        function progressbarcontrol(b){
+            // console.log(b.target);
+            const width = b.target.clientWidth;
+            console.log(width);
+            const clickx = b.offsetX+1;
+            console.log(clickx);
+
+            getaudioscreen.currentTime = `${(getaudioscreen.duration/width)*clickx}`;
+            getprogressbar.style.width = `${(getaudioscreen.duration/width)*clickx}px`;
+            playaudio();
+        }
     </script>
 </body>
 </html>
