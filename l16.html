@@ -26,10 +26,14 @@
             color: #f4f4f4;
             padding: 20px;
         }
+        .player i{
+            cursor: pointer;
+        }
         .progress{
             width: 300px;
             height: 10px;
             background-color: #f4f4f4;
+            cursor: pointer;
 
             border-radius: 24px;
             margin: 4px 3px 3px 10px;
@@ -41,8 +45,6 @@
             height: 100%;
             background-color: rgb(243, 11, 11);
             border-radius: 24px 0 0 24px;
-        }
-        .volume{
         }
     </style>
 </head>
@@ -76,6 +78,7 @@
 
     <script>
         const getaudioscreen = document.getElementById('audioscreen');
+        
         const playbtn = document.getElementById('play'),
               prevbtn = document.getElementById('prev'),
               nextbtn = document.getElementById('next'),
@@ -175,9 +178,9 @@
         function progressbarcontrol(b){
             // console.log(b.target);
             const width = b.target.clientWidth;
-            console.log(width);
+            // console.log(width);
             const clickx = b.offsetX+1;
-            console.log(clickx);
+            // console.log(clickx);
 
             getaudioscreen.currentTime = `${(getaudioscreen.duration/width)*clickx}`;
             getprogressbar.style.width = `${(getaudioscreen.duration/width)*clickx}px`;
