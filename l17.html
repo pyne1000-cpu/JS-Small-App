@@ -17,20 +17,30 @@
             display: grid;
             place-items: center;
         }
-        .player{
-            display: flex;
-            width: 700px;
-            flex-direction: row;
-            justify-content: space-evenly;
-            background-color: #1b1a1a;
-            color: #f4f4f4;
-            padding: 20px;
+        .container{
+            box-shadow: 0 10px 15px rgba(0, 0, 0, .5);
+        }
+        .container:fullscreen{
+            width: 100%;
+            height: 100%;
         }
         .videoscreen{
             width: 700px;
             height: 400px;
             display: block;
-            /* background-color: #f80606; */
+        }
+        .player{
+            display: flex;
+            width: 700px;
+            /* flex-direction: row; */
+            justify-content: space-evenly;
+            background-color: #1b1a1a;
+            color: #f4f4f4;
+            padding: 20px;
+        }
+        .player:fullscreen{
+            width: 100%;
+            height: 100%;
         }
         .player i{
             cursor: pointer;
@@ -71,6 +81,9 @@
             <div id="reload" class="reload">
                 <i class="fa-solid fa-rotate-right"></i>
             </div>
+            <div id="fullscreen" class="fullscreen">
+                <i class="fa-solid fa-maximize"></i>
+            </div>
             <div class="progress">
                 <div class="progress-bar"></div>
             </div>
@@ -97,7 +110,8 @@
         const playbtn = document.getElementById('play'),
               prevbtn = document.getElementById('prev'),
               nextbtn = document.getElementById('next'),
-              reloadbtn = document.getElementById('reload');
+              reloadbtn = document.getElementById('reload'),
+              fullscreenbtn = document.getElementById('fullscreen');
 
         // console.log(playbtn.querySelector('i.fa-solid'));
 
@@ -108,7 +122,7 @@
 
         const getvolume = document.querySelector('#volume');
 
-        const videos = ['sample1','sample2'];
+        const videos = ['sample1','sample2','sample3'];
         let idx = 0;
 
         function loadvideo(video){
@@ -153,18 +167,43 @@
             getvideoscreen.currentTime = 0;
         }
         function updateprogressbar(){
-            console.log('progress-bar running');
-            console.log(getprogress.style.width);
-            getprogressbar.style.width = `${(300/getvideoscreen.duration)*getvideoscreen.currentTime}px`;
+            // console.log('progress-bar running');
+            // console.log(getprogress.clientWidth);
+            getprogressbar.style.width = `${(getprogress.clientWidth/getvideoscreen.duration)*getvideoscreen.currentTime}px`;
         }
-        function volumecontrol(){}
+        function progressbarcontrol(e){
+            console.log("controling");
+            console.log(this.clientWidth);
+            const width = this.clientWidth;
+            // console.log(e.offsetX);
+            let curwidth = e.offsetX+1;
+            const b = getvideoscreen.duration;
+
+            console.log(`${(b/width)*curwidth}`);
+            getvideoscreen.currentTime = `${(b/width)*curwidth}`;
+        }
+        function volumecontrol(){
+            // console.log(getvolume.value);
+            // console.log(getvideoscreen.volume);
+            getvideoscreen.volume = getvolume.value/100;
+        }
+        function fullscreen(){
+            console.log("Full Screen");
+            // getvideoscreen.requestFullscreen();
+            document.querySelector('.container').requestFullscreen();
+        }
 
         loadvideo(videos[idx]);
+        getvideoscreen.addEventListener('play',playvideo);
+        getvideoscreen.addEventListener('pause',pausevideo);
         playbtn.addEventListener('click',playorpause);
         prevbtn.addEventListener('click',prev);
         nextbtn.addEventListener('click',next);
         reloadbtn.addEventListener('click',restartvideo);
+        fullscreenbtn.addEventListener('click',fullscreen);
         getvideoscreen.addEventListener('timeupdate',updateprogressbar);
+        getprogress.addEventListener('click',progressbarcontrol);
+        getvolume.addEventListener('click',volumecontrol);
     </script>
 </body>
 </html>
