@@ -28,8 +28,9 @@
         }
         .videoscreen{
             width: 700px;
+            height: 400px;
             display: block;
-            background-color: #f80606;
+            /* background-color: #f80606; */
         }
         .player i{
             cursor: pointer;
@@ -83,7 +84,87 @@
     </div>
 
     <script>
+        const getvideoscreen = document.getElementById('videoscreen');
+   
+        // console.log(getvideoscreen.videoWidth);
+        // console.log(getvideoscreen.videoHeight);
+        getvideoscreen.addEventListener('loadedmetadata', () => {
+        console.log("metadata loaded");
+        console.log(getvideoscreen.videoWidth);
+        console.log(getvideoscreen.videoHeight);
+    });
+        
+        const playbtn = document.getElementById('play'),
+              prevbtn = document.getElementById('prev'),
+              nextbtn = document.getElementById('next'),
+              reloadbtn = document.getElementById('reload');
 
+        // console.log(playbtn.querySelector('i.fa-solid'));
+
+        const getprogress = document.querySelector('.progress'),
+              getprogressbar = document.querySelector('.progress-bar');
+
+        const gettime = document.querySelector('.time'); 
+
+        const getvolume = document.querySelector('#volume');
+
+        const videos = ['sample1','sample2'];
+        let idx = 0;
+
+        function loadvideo(video){
+            getvideoscreen.src = `./source/mp4/${video}.mp4`;
+        }
+        function playvideo(){
+            console.log('playing video');
+            playbtn.querySelector('i.fa-solid').classList.remove('fa-play');
+            playbtn.querySelector('i.fa-solid').classList.add('fa-pause');
+            getvideoscreen.play();
+        }
+        function pausevideo(){
+            console.log('video paused');
+            playbtn.querySelector('i.fa-solid').classList.remove('fa-pause');
+            playbtn.querySelector('i.fa-solid').classList.add('fa-play');
+            getvideoscreen.pause();
+        }
+        function playorpause(){
+            if(getvideoscreen.paused){
+                playvideo();
+            }else{
+                pausevideo();
+            }
+        }
+        function prev(){
+            idx--;
+            if(idx<0){
+                idx = videos.length-1;
+            }
+            loadvideo(videos[idx]);
+            playvideo();
+        }
+        function next(){
+            idx++;
+            if(idx>videos.length-1){
+                idx = 0;
+            }
+            loadvideo(videos[idx]);
+            playvideo();   
+        }
+        function restartvideo(){
+            getvideoscreen.currentTime = 0;
+        }
+        function updateprogressbar(){
+            console.log('progress-bar running');
+            console.log(getprogress.style.width);
+            getprogressbar.style.width = `${(300/getvideoscreen.duration)*getvideoscreen.currentTime}px`;
+        }
+        function volumecontrol(){}
+
+        loadvideo(videos[idx]);
+        playbtn.addEventListener('click',playorpause);
+        prevbtn.addEventListener('click',prev);
+        nextbtn.addEventListener('click',next);
+        reloadbtn.addEventListener('click',restartvideo);
+        getvideoscreen.addEventListener('timeupdate',updateprogressbar);
     </script>
 </body>
 </html>
