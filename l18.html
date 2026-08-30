@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: grid;
+            place-items: center;
+            height: 100vh;
+        }
+        .container{
+            width: 600px;
+            height: 400px;
+            background-color: #f4f4f4;
+            box-shadow: 0 0 8px rgba(0, 0, 0, .5);
+            padding: 20px;
+        }
+        .month{
+            float: left;
+        }
+        .month .curmonth,.year .curyear{
+            background-color: skyblue;
+            color: #fff;
+            font-size: 24px;
+            padding: 5px 30px;
+            /* border-radius: 10px; */
+            /* border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px; */
+        }
+        .month .curmonth:hover,.year .curyear:hover{
+            background-color: steelblue;
+            cursor: pointer;
+        }
+        .month-list .months,.year-list .years{
+            display: none;
+            text-align: center;
+            background-color: steelblue;
+            color: #f4f4f4;
+            opacity: .6;
+            padding: 5px 0;
+            border-bottom: 1px solid rgb(241, 238, 238);
+        }
+        .month-list .months:hover,.year-list .years:hover{
+            opacity: 1;
+        }
+        .year{
+            float: right;
+        }
+        .dayanddate{
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="month">
+            <span class="curmonth">Aug</span>
+            <div class="month-list">
+                <div class="months">Jan</div>
+                <div class="months">Feb</div>
+                <div class="months">Mar</div>
+                <div class="months">Apr</div>
+                <div class="months">May</div>
+                <div class="months">Jun</div>
+                <div class="months">Jul</div>
+                <div class="months">Aug</div>
+                <div class="months">Sep</div>
+                <div class="months">Oct</div>
+                <div class="months">Nov</div>
+                <div class="months">Dec</div>
+            </div>
+        </div>
+        <div class="year">
+            <span class="curyear">2026</span>
+            <div class="year-list">
+                <div class="years">2025</div>
+                <div class="years">2026</div>
+                <div class="years">2027</div>
+                <div class="years">2028</div>
+                <div class="years">2029</div>
+                <div class="years">2030</div>
+                <div class="years">2031</div>
+                <div class="years">2032</div>
+                <div class="years">2033</div>
+                <div class="years">2034</div>
+                <div class="years">2035</div>
+            </div>
+        </div>
+        <div class="dayanddate">
+            <div class="days">
+                <label class="day">Sun</label>
+                <label class="day">Mon</label>
+                <label class="day">Tue</label>
+                <label class="day">Wed</label>
+                <label class="day">Thu</label>
+                <label class="day">Fri</label>
+                <label class="day">Sat</label>
+            </div>
+            <div class="dates">
+                <label class="date">1</label>
+                <label class="date">2</label>
+                <label class="date">3</label>
+                <label class="date">4</label>
+                <label class="date">5</label>
+                <label class="date">6</label>
+                <label class="date">7</label>
+                <label class="date">8</label>
+                <label class="date">9</label>
+                <label class="date">10</label>
+                <label class="date">11</label>
+                <label class="date">12</label>
+                <label class="date">13</label>
+                <label class="date">14</label>
+                <label class="date">15</label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+</html>
