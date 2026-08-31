@@ -25,61 +25,76 @@
         }
         .month{
             float: left;
+            position: relative;
         }
         .year{
             float: right;
+            position: relative;
         }
         .month .curmonth,.year .curyear{
+            width: 100px;
             background-color: skyblue;
             color: #fff;
             font-size: 24px;
             padding: 5px 30px;
-            /* margin-bottom: 20px; */
-            /* border-radius: 10px; */
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
-            position: relative;
-            z-index: 2;
+            border: none;
+            outline: none;
         }
         .month .curmonth:hover,.year .curyear:hover{
             background-color: steelblue;
             cursor: pointer;
         }
         .month-list,.year-list{
+            display: none;
+
             position: absolute;
             top: 100%;
             left: 0;
             z-index: 10;
         }
         .month-list .months,.year-list .years{
-            /* display: none; */
+            width: 100px;
             text-align: center;
-            background-color: steelblue;
-            color: #f4f4f4;
-            opacity: .6;
+            background-color: #f4f4f4;
+            color: rgba(0, 0, 0, .5);
             padding: 5px 0;
-            border-bottom: 1px solid rgb(241, 238, 238);
-
-            /* z-index: inherit; */
+            border: 1px solid skyblue;
+            border-top: none;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
         .month-list .months:hover,.year-list .years:hover{
-            opacity: 1;
+            color: rgba(0, 0, 0, 1);
+            border: 2px solid steelblue;
+            cursor: pointer;
         }
         .dayanddate{
             clear: both;
-            border: 1px solid #333;
+            /* border: 1px solid #333; */
             position: relative;
+            top: 20px;            
+            left: 0;
             z-index: 1;
         }
         .days,.dates{
             display: grid;
             grid-template-columns: repeat(7,1fr);
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 5px;
+        }
+        .days label{
+            background-color: steelblue;
+            color: #fff;
+            border: none;
+        }
+        .dates label    {
+            border: 2px solid #333;
+
         }
         .days label,.dates label{
             text-align: center;
-            border: 2px solid #333;
             padding: 10px 20px;
             border-radius: 20px;
         }
@@ -88,7 +103,7 @@
 <body>
     <div class="container">
         <div class="month">
-            <span class="curmonth" >Aug</span>
+            <button class="curmonth" >Aug</button>
             <div class="month-list">
                 <div class="months">Jan</div>
                 <div class="months">Feb</div>
@@ -105,7 +120,7 @@
             </div>
         </div>
         <div class="year">
-            <span class="curyear" >2026</span>
+            <button class="curyear" >2026</button>
             <div class="year-list">
                 <div class="years">2025</div>
                 <div class="years">2026</div>
