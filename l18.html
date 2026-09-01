@@ -54,6 +54,9 @@
             left: 0;
             z-index: 10;
         }
+        .month-list.show,.year-list.show{
+            display: block;
+        }
         .month-list .months,.year-list .years{
             width: 100px;
             text-align: center;
@@ -103,7 +106,7 @@
 <body>
     <div class="container">
         <div class="month">
-            <button class="curmonth" >Aug</button>
+            <button id="curmonth" class="curmonth" >Aug</button>
             <div class="month-list">
                 <div class="months">Jan</div>
                 <div class="months">Feb</div>
@@ -120,7 +123,7 @@
             </div>
         </div>
         <div class="year">
-            <button class="curyear" >2026</button>
+            <button id="curyear" class="curyear" >2026</button>
             <div class="year-list">
                 <div class="years">2025</div>
                 <div class="years">2026</div>
@@ -166,7 +169,39 @@
     </div>
 
     <script>
+        const getmonthbtn = document.getElementById('curmonth'),
+              getmonthlist = document.querySelector('.month-list'), 
+              getmonths = document.querySelectorAll('.months'), 
+              getyearbtn = document.getElementById('curyear'),
+              getyearlist = document.querySelector('.year-list'),
+              getyears = document.querySelectorAll('.years'),
+              getdates = document.querySelector('.dates');
 
+        getmonthbtn.addEventListener('click',()=>{
+            if(getmonthlist.classList.contains('show')){
+                getmonthlist.classList.remove('show');
+            }else{
+                getmonthlist.classList.add('show');
+                getmonths.forEach((eachmonth)=>{
+                    // console.log(eachmonth);
+                    eachmonth.addEventListener('click',(e)=>{
+                        console.log(e.target);
+                      getmonthbtn.textContent = e.target.textContent;
+                      getmonthlist.classList.remove('show');
+                    })
+                })
+            }
+        })      
+        getyearbtn.addEventListener('click',()=>{
+            if(getyearlist.classList.contains('show')){
+                getyearlist.classList.remove('show');
+            }else{
+                getyearlist.classList.add('show');
+            }
+        })      
+        function showdate(){
+
+        }      
     </script>
 </body>
 </html>
