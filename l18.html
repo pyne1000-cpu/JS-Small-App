@@ -177,28 +177,46 @@
               getyears = document.querySelectorAll('.years'),
               getdates = document.querySelector('.dates');
 
-        getmonthbtn.addEventListener('click',()=>{
-            if(getmonthlist.classList.contains('show')){
-                getmonthlist.classList.remove('show');
+        // getmonthbtn.addEventListener('click',()=>{
+        //     if(getmonthlist.classList.contains('show')){
+        //         getmonthlist.classList.remove('show');
+        //     }else{
+        //         getmonthlist.classList.add('show');
+        //         getmonths.forEach((eachmonth)=>{
+        //             // console.log(eachmonth);
+        //             eachmonth.addEventListener('click',(e)=>{
+        //                 console.log(e.target);
+        //               getmonthbtn.textContent = e.target.textContent;
+        //               getmonthlist.classList.remove('show');
+        //             })
+        //         })
+        //     }
+        // })   
+
+        getmonthbtn.addEventListener('click',()=>{choosedate(getmonthlist,getmonths,getmonthbtn)});   
+        getyearbtn.addEventListener('click',()=>{choosedate(getyearlist,getyears,getyearbtn)})  
+
+        function choosedate(a,b,c){
+            if(a.classList.contains('show')){
+                a.classList.remove('show');
             }else{
-                getmonthlist.classList.add('show');
-                getmonths.forEach((eachmonth)=>{
+                a.classList.add('show');
+                b.forEach((eachmonth)=>{
                     // console.log(eachmonth);
                     eachmonth.addEventListener('click',(e)=>{
                         console.log(e.target);
-                      getmonthbtn.textContent = e.target.textContent;
-                      getmonthlist.classList.remove('show');
+                      c.textContent = e.target.textContent;
+                      a.classList.remove('show');
                     })
                 })
             }
-        })      
-        getyearbtn.addEventListener('click',()=>{
-            if(getyearlist.classList.contains('show')){
-                getyearlist.classList.remove('show');
-            }else{
-                getyearlist.classList.add('show');
-            }
-        })      
+        }
+        
+        abc();
+        function abc(){
+            let uimonth = new Date(year,month,0);
+            console.log(uimonth);
+        }
         function showdate(){
 
         }      
