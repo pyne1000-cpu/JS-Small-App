@@ -18,7 +18,7 @@
         }
         .container{
             width: 600px;
-            height: 400px;
+            min-height: 400px;
             background-color: #f4f4f4;
             box-shadow: 0 0 8px rgba(0, 0, 0, .5);
             padding: 20px;
@@ -36,6 +36,7 @@
             background-color: skyblue;
             color: #fff;
             font-size: 24px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
             padding: 5px 30px;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -45,6 +46,10 @@
         .month .curmonth:hover,.year .curyear:hover{
             background-color: steelblue;
             cursor: pointer;
+        }
+        .month .curmonth:active,.year .curyear:active{
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+            transform: translateY(1px);
         }
         .month-list,.year-list{
             display: none;
@@ -60,7 +65,7 @@
         .month-list .months,.year-list .years{
             width: 100px;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: #eee;
             color: rgba(0, 0, 0, .5);
             padding: 5px 0;
             border: 1px solid skyblue;
@@ -70,6 +75,7 @@
         }
         .month-list .months:hover,.year-list .years:hover{
             color: rgba(0, 0, 0, 1);
+            background-color: #fff;
             border: 2px solid steelblue;
             cursor: pointer;
         }
@@ -85,28 +91,33 @@
             display: grid;
             grid-template-columns: repeat(7,1fr);
             gap: 10px;
-            margin-top: 5px;
+        }
+        .dates{
+            margin-top: 5px ;
+            margin-bottom: 10px ;
         }
         .days label{
             background-color: steelblue;
             color: #fff;
             border: none;
         }
-        .dates label    {
+        .dates label{
             border: 2px solid #333;
-
         }
         .days label,.dates label{
             text-align: center;
             padding: 10px 20px;
             border-radius: 20px;
         }
+        .dates label.blank{
+            background-color: red;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="month">
-            <button id="curmonth" class="curmonth" >Aug</button>
+            <button id="curmonth" class="curmonth" >May</button>
             <div class="month-list">
                 <div class="months">Jan</div>
                 <div class="months">Feb</div>
@@ -123,7 +134,7 @@
             </div>
         </div>
         <div class="year">
-            <button id="curyear" class="curyear" >2026</button>
+            <button id="curyear" class="curyear" >2004</button>
             <div class="year-list">
                 <div class="years">2025</div>
                 <div class="years">2026</div>
@@ -171,12 +182,13 @@
     <script>
         const getmonthbtn = document.getElementById('curmonth'),
               getmonthlist = document.querySelector('.month-list'), 
-              getmonths = document.querySelectorAll('.months'), 
+              getmonths = document.querySelectorAll('.months'),  
               getyearbtn = document.getElementById('curyear'),
               getyearlist = document.querySelector('.year-list'),
               getyears = document.querySelectorAll('.years'),
               getdates = document.querySelector('.dates');
 
+              // Sketch for choosedate function
         // getmonthbtn.addEventListener('click',()=>{
         //     if(getmonthlist.classList.contains('show')){
         //         getmonthlist.classList.remove('show');
@@ -204,22 +216,78 @@
                 b.forEach((eachmonth)=>{
                     // console.log(eachmonth);
                     eachmonth.addEventListener('click',(e)=>{
-                        console.log(e.target);
+                        // console.log(e.target);
                       c.textContent = e.target.textContent;
                       a.classList.remove('show');
+             
+                      showdate();
+
                     })
                 })
             }
+
         }
         
-        abc();
-        function abc(){
-            let uimonth = new Date(year,month,0);
-            console.log(uimonth);
+        getcurmmandyy();
+        function getcurmmandyy(){
+            let uimonth = new Date().getMonth();
+            let uiyear = new Date().getFullYear();
+            // console.log(uimonth);
+            // console.log(uiyear);
+            getyearbtn.textContent = uiyear;
+            // console.log(getmonths[uimonth]);
+            getmonthbtn.textContent = getmonths[uimonth].textContent; 
         }
-        function showdate(){
 
-        }      
+        showdate();
+        function showdate(){
+            let month;
+            for(let i=0;i<getmonths.length;i++){
+                if(getmonths[i].textContent == getmonthbtn.textContent){
+                    console.log(i);
+                    month = i;
+                    break;
+                }
+            };
+            let year = Number(getyearbtn.textContent);
+            // console.log(month);
+            // console.log(year);
+
+            let selectmmandyy = new Date(year,month+1,0);
+            let blankday = new Date(year,month,0).getDay();
+            let eachday = selectmmandyy.getDate();
+            // console.log(selectmmandyy);
+            // console.log(selectmmandyy.getDate());
+            // console.log(blankday);
+
+            fillblankday(blankday);
+            filleachdate(eachday);
+        }  
+
+        function fillblankday(blankday){
+            getdates.innerHTML = "";
+            if(blankday<6){
+                for(let i=0;i<=blankday;i++){
+                    let newlabel = document.createElement('label')
+                        newlabel.className = 'date blank';   
+                        newlabel.textContent = "x"; 
+
+                        // console.log('filling blank dates');
+                    getdates.appendChild(newlabel);    
+                    }
+            }
+        }   
+        function filleachdate(eachday){
+            for(i=0;i<eachday;i++){
+                let newlabel = document.createElement('label')
+                   newlabel.className = 'date';   
+                   newlabel.textContent = i+1; 
+
+                //    console.log('filling each date');
+                
+                getdates.appendChild(newlabel);    
+            }
+        }
     </script>
 </body>
 </html>
