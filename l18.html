@@ -102,6 +102,7 @@
             border: none;
         }
         .dates label{
+            /* height: 40px; */
             border: 2px solid #333;
         }
         .days label,.dates label{
@@ -110,7 +111,8 @@
             border-radius: 20px;
         }
         .dates label.blank{
-            background-color: red;
+            background-color: transparent;
+            border: none;
         }
     </style>
 </head>
@@ -160,7 +162,7 @@
                 <label class="day">Sat</label>
             </div>
             <div class="dates">
-                <label class="date">1</label>
+                <!-- <label class="date">1</label>
                 <label class="date">2</label>
                 <label class="date">3</label>
                 <label class="date">4</label>
@@ -174,7 +176,7 @@
                 <label class="date">12</label>
                 <label class="date">13</label>
                 <label class="date">14</label>
-                <label class="date">15</label>
+                <label class="date">15</label> -->
             </div>
         </div>
     </div>
@@ -225,7 +227,6 @@
                     })
                 })
             }
-
         }
         
         getcurmmandyy();
@@ -244,7 +245,7 @@
             let month;
             for(let i=0;i<getmonths.length;i++){
                 if(getmonths[i].textContent == getmonthbtn.textContent){
-                    console.log(i);
+                    // console.log(i);
                     month = i;
                     break;
                 }
@@ -270,7 +271,7 @@
                 for(let i=0;i<=blankday;i++){
                     let newlabel = document.createElement('label')
                         newlabel.className = 'date blank';   
-                        newlabel.textContent = "x"; 
+                        // newlabel.textContent = "x"; 
 
                         // console.log('filling blank dates');
                     getdates.appendChild(newlabel);    
