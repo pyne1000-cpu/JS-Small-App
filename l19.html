@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Input to Text</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        body{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: grid;
+            place-items: center;
+        }
+        .container{
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .guessnum{
+            border: none;
+            outline: none;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        .next-btn{
+            background-color: skyblue;
+            color: #f4f4f4;
+            border: none;
+            outline: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, .5);
+        }
+        .next-btn:hover{
+            cursor: pointer;
+        }
+        .next-btn:active{
+            transform: translateY(1px);
+        }
+        #mic-btn{
+            display: block;
+            background-color: red;
+            color: #f4f4f4;
+            width: 150px;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Number Guess Game</h3>
+        <label for="guessnum"></label>
+        <form action="">
+            <input type="number" id="guessnum" class="guessnum" placeholder="1 to 99" min="0" max="99">
+
+            <button type="submit" class="next-btn">Next</button>
+        </form>
+        <button id="mic-btn"><i class="fa-solid fa-microphone"></i>Use Microphone</button>
+        <div class="showmessage">
+            <span class="message">blah blah blah</span>
+        </div>
+    </div>
+
+    <script>
+        const getguessnum = document.getElementById('guessnum'),
+              getnextbtn = document.querySelector('.next-btn'),
+              getmessage = document.querySelector('.message'),
+              getmicbtn = document.getElementById('mic-btn');
+        
+        let gameleft = 3,
+            winningnum = 30;
+              
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let getrec = new window.SpeechRecognition;
+
+        getmicbtn.addEventListener('click',function(){
+            console.log('mic');
+            getrec.start();
+
+            getrec.addEventListener('result',(e)=>talking(e));
+        })
+
+        function talking(ele){
+            console.log(ele);
+            const micresult = ele.results[0][0].transcript;
+            console.log(typeof micresult);
+            getnum(micresult)
+
+        }
+
+        function getnum(msg){
+            if(Number.isNaN(msg)){
+                console.log('Invalid Number!!!');
+                return false;
+            }
+            console.log('Valid Number');
+        }
+
+    </script>
+</body>
+</html>
