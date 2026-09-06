@@ -24,7 +24,7 @@
             margin-bottom: 10px;
             padding: 10px;
         }
-        .next-btn{
+        .submit-btn{
             background-color: skyblue;
             color: #f4f4f4;
             border: none;
@@ -33,10 +33,10 @@
             border-radius: 5px;
             box-shadow: 0 0 3px rgba(0, 0, 0, .5);
         }
-        .next-btn:hover{
+        .submit-btn:hover{
             cursor: pointer;
         }
-        .next-btn:active{
+        .submit-btn:active{
             transform: translateY(1px);
         }
         #mic-btn{
@@ -55,25 +55,31 @@
         <form action="">
             <input type="number" id="guessnum" class="guessnum" placeholder="1 to 99" min="0" max="99">
 
-            <button type="submit" class="next-btn">Next</button>
+            <button type="submit" class="submit-btn">Submit</button>
         </form>
         <button id="mic-btn"><i class="fa-solid fa-microphone"></i>Use Microphone</button>
         <div class="showmessage">
-            <span class="message">blah blah blah</span>
+            <span class="message"></span>
         </div>
     </div>
 
     <script>
         const getguessnum = document.getElementById('guessnum'),
-              getnextbtn = document.querySelector('.next-btn'),
+              getsubmitbtn = document.querySelector('.submit-btn'),
               getmessage = document.querySelector('.message'),
               getmicbtn = document.getElementById('mic-btn');
         
-        let gameleft = 3,
-            winningnum = 30;
+        const gameleft = 3,
+            min = 1,
+            max = 99,
+            // winningnum = 20;
+            winningnum = Math.random();
+            console.log(winningnum);
               
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let getrec = new window.SpeechRecognition;
+
+        getsubmitbtn.disabled = true;
 
         getmicbtn.addEventListener('click',function(){
             console.log('mic');
@@ -82,20 +88,65 @@
             getrec.addEventListener('result',(e)=>talking(e));
         })
 
+        let resulttonum;
         function talking(ele){
             console.log(ele);
             const micresult = ele.results[0][0].transcript;
+            resulttonum = +micresult;
+            console.log(micresult);
             console.log(typeof micresult);
-            getnum(micresult)
+            console.log(resulttonum);
+            console.log(typeof resulttonum);
 
+            getnum(resulttonum);
         }
 
         function getnum(msg){
             if(Number.isNaN(msg)){
                 console.log('Invalid Number!!!');
+                getsubmitbtn.disabled = true;
+                getmessage.style.color = "black";
+                getmessage.textContent = `Say a Valid Number`;
                 return false;
             }
             console.log('Valid Number');
+            getmessage.style.color = "black";
+            getmessage.innerHTML = `Did you say : [ ${msg} ]`
+            getsubmitbtn.disabled = false;
+            // getmicbtn.disabled = true;
+        }
+
+        getsubmitbtn.addEventListener('click',function(e){
+                e.preventDefault();
+        
+                getsubmitbtn.disabled = true;
+                getmicbtn.disabled = false;
+
+
+                if(resulttonum === winningnum){
+                    getmessage.style.color = "green";
+                    getmessage.textContent = `You answer is Correct,You WIN!!!`;
+                    playagain();
+                    }else{
+                        gameleft--;
+                        console.log(gameleft);
+                        getmessage.style.color = "red";
+                        getmessage.textContent = `${resulttonum} is Not Correct,${gameleft} Chance left!!!`;
+                        if(gameleft<=0){
+                            playagain();
+                            getmessage.textContent = `${resulttonum} is Not Correct,Try Again!!!`;
+                        }
+                    }
+                })
+
+        function playagain(){
+            getsubmitbtn.disabled = false;
+            getmicbtn.disabled = true;
+            getsubmitbtn.textContent = "Play Again";
+            getsubmitbtn.addEventListener('click',function(){
+                window.location.reload();
+                }
+            )
         }
 
     </script>
