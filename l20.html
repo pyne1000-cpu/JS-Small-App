@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Line</title>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+        }
+        .time-line{
+            width: 800px;
+            margin: auto;
+
+            position: relative;
+        }
+        .time-line::after{
+            content: "";
+
+            width: 6px;
+            height: 100%;
+            background-color: #f6f6f6;
+
+            position: absolute;
+            top: 0;
+            left: 50%;
+        }
+        .boxes{
+            width: 40%;
+            /* background-color: red; */
+            padding: 10px 40px;
+
+            position: relative;
+        }
+        .boxes::before{
+            content: "";
+            
+            width: 20px;
+            height: 20px;
+            background-color: #f4f4f4;
+            border-radius: 3px;
+
+            position: absolute;
+            top : 15%;
+            right: -13px;
+
+            z-index: 10;
+        }
+        .right::before{
+            left: -7px;
+        }
+        .left{
+            left: 0;
+        }
+        .right{
+            left: 50%;
+        }
+        .left::after{
+            content: "";
+
+            width: 0;
+            height: 0;
+
+            position: absolute;
+            top: 30px;
+            left: 90%;
+
+            border-width: 10px 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent #f6f6f6;
+        }
+        .right::after{
+            content: "";
+
+            width: 0;
+            height: 0;
+
+            position: absolute;
+            top: 30px;
+            right: 90%;
+
+            border-width: 10px 10px 10px 0;
+            border-style: solid;
+            border-color: transparent  #f6f6f6 transparent transparent;            
+        }
+        .content{
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="time-line">
+        <div class="boxes left">
+            <div class="content">
+                <h3>Nokia Company</h3>
+                <i>Project Director</i>
+                <small>2016 - 2029</small>
+                <p>The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those interested.</p>
+            </div>
+        </div>
+        <div class="boxes right">
+            <div class="content">
+                <h3>Samsung Company</h3>
+                <i>Project Director</i>
+                <small>2016 - 2029</small>
+                <p>The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those interested.</p>
+            </div>
+        </div>
+        <div class="boxes left">
+            <div class="content">
+                <h3>Sony Company</h3>
+                <i>Project Director</i>
+                <small>2016 - 2029</small>
+                <p>The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those interested.</p>
+            </div>
+        </div>
+        <div class="boxes right">
+            <div class="content">
+                <h3>ABC Company</h3>
+                <i>Project Director</i>
+                <small>2016 - 2029</small>
+                <p>The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those interested.</p>
+            </div>
+        </div>
+        <div class="boxes left">
+            <div class="content">
+                <h3>Apple Company</h3>
+                <i>Project Director</i>
+                <small>2016 - 2029</small>
+                <p>The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those interested.</p>
+            </div>
+        </div>
+        <div class="boxes right">
+            <div class="content">
+                <h3>General Magic Company</h3>
+                <i>Project Director</i>
+                <small>2016 - 2029</small>
+                <p>The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those interested.</p>
+            </div>
+        </div>
+        <div class="boxes left">
+            <div class="content">
+                <h3>Anycall Company</h3>
+                <i>Project Director</i>
+                <small>2002 - 2026</small>
+                <p>The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those interested.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const getallboxes = document.querySelectorAll('.boxes');
+        getallboxes.forEach((e)=>{
+            console.log(e);
+            e.addEventListener('mouseenter',function(){
+                console.log(this);
+                if(this.classList.contains('left')){
+                    this.classList.remove('left');
+                    this.classList.add('right');
+                }else{
+                    this.classList.remove('right');
+                    this.classList.add('left');
+                }
+            })
+        })
+    </script>
+</body>
+</html>
