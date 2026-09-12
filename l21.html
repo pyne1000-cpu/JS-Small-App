@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav Bar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        body{
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .menu-btn{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 5;
+        }
+        .nav-bar{
+            width: 100%;
+            background-color: black;
+            color: #fff;
+            display: flex;
+            justify-content: end;
+
+            position: absolute;
+            top: 0;
+        }
+        .nav-bar .nav-bar-item{
+            text-decoration: none;
+            background-color: inherit;
+            color: #f4f4f4;
+            padding: 20px;
+        }
+        .nav-bar .nav-bar-item:hover{
+            color: #ccc;
+        }
+        .dropdown-toggle{
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            background-color: inherit;
+            color: #f4f4f4;
+            cursor: pointer;
+            padding: 0 20px;
+        }
+        .dropdown-toggle:hover{
+            color: #ccc;
+        }
+        .dropdown-menu,.dropdown-menu-mega{
+            display: block;
+            background-color: #f4f4f4 ;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, .5);
+
+            opacity: 0;
+            visibility: hidden;
+
+            position: absolute;
+            z-index: 2;
+
+            transition: all .3s ease-in;
+        }
+        .dropdown-menu-mega{
+            width: 100%;
+            left: 0;
+        }
+        .dropdown-item{
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            color:  #333;
+            padding: 10px 30px;
+
+            transition: all .1s ease-in;
+        }
+        .dropdown-item:hover{
+            background-color: skyblue;
+            color: #f4f4f4;
+        }
+        .dropdown:hover .dropdown-menu,.dropdown:hover .dropdown-menu-mega{
+            opacity: 1;
+            visibility: visible;
+        }
+        .row{
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .header{
+            background: linear-gradient(75deg,gray,black);
+            color: #f4f4f4;
+            padding: 1px 0;
+        }
+        .header h2{
+            margin-left: 20px;
+        }
+        .col-4 h4{
+            color: #333;
+            text-align: center;
+            text-decoration: underline;
+        }
+        .side-panel{
+            display: none;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: #eee;
+            font-size: larger;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+        .side-panel.active{
+            display: block;
+        }
+        .side-panel .cls-btn{
+            background-color: inherit;
+            color: #f4f4f4;
+            border: none;
+            outline: none;
+            cursor: pointer;
+
+            position: absolute;
+            right: 5px;
+            top: 10px;
+        }
+        .side-panel .cls-btn:hover{
+            color: red;
+        }
+        .side-panel .profile{
+            display: flex;
+            color: orangered;
+            margin: 20px 10px;
+        }
+        .side-panel .profile i{
+            font-size: 50px;
+        }
+        .side-panel .profile em{
+            display: inline-block;
+            transform: translateY(15px);
+        }
+        .list-group{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .side-panel-item,.list-group li{
+            width: 150px;
+            background-color: rgb(135, 163, 235);
+            padding: 10px 20px;
+            margin: 0 0 10px 10px;
+            cursor: pointer;
+        }
+        .side-panel-item:hover,.list-group li:hover{
+            color: #fff;
+            background-color: rgb(102, 123, 160);
+        }
+        .list-group li{
+            margin-left: 40px;
+        }
+        .list-group li a{
+            color: inherit;
+            opacity: .8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-btn"><i class="fa-solid fa-bars"></i></button>
+    <div class="nav-bar">
+        <a href="javascript:void(0);" class="nav-bar-item">Home</a>
+        <a href="javascript:void(0);" class="nav-bar-item">News</a>
+        <div class="dropdown">
+            <button class="dropdown-toggle">Download</button>
+            <div class="dropdown-menu">
+                <a href="javascript:void(0);" class="dropdown-item">Video</a>
+                <a href="javascript:void(0);" class="dropdown-item">Audio</a>
+                <a href="javascript:void(0);" class="dropdown-item">PDF</a>
+            </div>
+        </div>
+        <a href="javascript:void(0);" class="nav-bar-item">Documentation</a>
+        <div class="dropdown">
+            <button class="dropdown-toggle">Site Settings</button>
+            <div class="dropdown-menu-mega">
+                <div class="header">
+                    <h2>Mega Menu</h2>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <h4>Connection</h4>
+                        <a href="javascript:void(0);" class="dropdown-item">API Request</a>
+                        <a href="javascript:void(0);" class="dropdown-item">Private Token</a>
+                        <a href="javascript:void(0);" class="dropdown-item">AWS Hosting</a>
+                    </div>
+                    <div class="col-4">
+                        <h4>Resource</h4>
+                        <a href="javascript:void(0);" class="dropdown-item">Github</a>
+                        <a href="javascript:void(0);" class="dropdown-item">Gitlab</a>
+                        <a href="javascript:void(0);" class="dropdown-item">Gitbucket</a>
+                    </div>
+                    <div class="col-4">
+                        <h4>Settings</h4>
+                        <a href="javascript:void(0);" class="dropdown-item">View Profile</a>
+                        <a href="javascript:void(0);" class="dropdown-item">Change Profile</a>
+                        <a href="javascript:void(0);" class="dropdown-item">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="side-panel">
+        <button class="cls-btn"><i class="fa-solid fa-xmark"></i></button>
+        <div class="profile">
+            <i class="fa-solid fa-circle-user"></i>
+            <em>Profile</em>
+        </div>
+        <div class="side-panel-item">Dashboard</div>
+        <div>
+            <div class="side-panel-item">Others</div>
+            <ul class="list-group">
+                <li><a href="javascript:void(0);">Sales Report</a></li>
+                <li><a href="javascript:void(0);">Purchase Report</a></li>
+                <li><a href="javascript:void(0);">Return Report</a></li>
+            </ul>
+        </div>
+        <div class="side-panel-item">User Manage</div>
+    </div>
+</body>
+
+<script>
+    const getmenubtn = document.querySelector('.menu-btn'),
+          getclsbtn = document.querySelector('.cls-btn'),
+          getsidepanel = document.querySelector('.side-panel');
+
+          getmenubtn.addEventListener('click',function(){
+            getsidepanel.classList.add('active');
+          })
+          getclsbtn.addEventListener('click',function(){
+            getsidepanel.classList.remove('active');
+          })
+
+    
+</script>
+</html>
