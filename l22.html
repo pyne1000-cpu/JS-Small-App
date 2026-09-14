@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movable Button</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            display: grid;
+            place-items: center;
+        }
+        .box{
+            user-select: none;
+            position: absolute;
+
+            /* z-index: 100; */
+        }
+        #btn{
+            background-color: skyblue;
+            color: #fff;
+            font-size: 1rem;
+            border: none;
+            outline: none;
+            box-shadow: 0 5px 3px rgba(0, 0, 0, .5);
+            padding: 10px 20px;
+            cursor: move;
+
+            z-index: 5;
+        }
+        #btn:active{
+            transform: translateY(2px);
+            box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
+        }
+        .icons{
+            position: absolute;
+            /* top: 0;
+            left: 0; */
+            z-index: 1;
+        }
+        .icons .btn-icon{
+            width: 50px;
+            height: 40px;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%,-50%);
+
+            visibility: hidden;
+
+            transition: all .5s ease;
+        }
+        .icons.show .btn-icon{
+            visibility: visible;
+        }
+        .icons.show .btn-icon:nth-of-type(1){
+            background-color: blue;
+            top: -40px;
+            left: 50%;
+
+            /* z-index: 1; */
+        }
+        .icons.show .btn-icon:nth-of-type(2){
+            background-color: black;
+            top: 50%;
+            left: 150px;
+
+            /* z-index: 2; */
+        }
+        .icons.show .btn-icon:nth-of-type(3){
+            background-color: #25d366;
+            left: 50%;
+            top: 80px;
+
+            /* z-index: 3; */
+        }
+        .icons.show .btn-icon:nth-of-type(4){
+            background-color: #7289da;
+            top: 50%;
+            left: -40px;
+
+            /* z-index: 4; */
+        }
+    </style>
+</head>
+<body>  
+    <div class="box">
+        <button id="btn">Move me</button>
+        <div class="icons">
+            <div class="btn-icon"><i class="fa-brands fa-facebook-f icn"></i></div>
+            <div class="btn-icon"><i class="fa-solid fa-x"></i></div>
+            <div class="btn-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="btn-icon"><i class="fa-brands fa-discord"></i></div>
+        </div>
+    </div>
+
+    <script>
+        const getbox = document.querySelector('.box'),
+              getbtn = document.getElementById('btn'),
+              geticons = document.querySelector('.icons');
+
+              getbtn.addEventListener('click',function(){
+                geticons.classList.add('show');
+              })
+              getbtn.addEventListener('dblclick',function(){
+                geticons.classList.remove('show');
+              })
+        
+              
+    </script>
+</body>
+</html>
