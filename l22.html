@@ -14,10 +14,12 @@
             width: 100vw;
             display: grid;
             place-items: center;
+
+            overflow-x: hidden;
         }
         .box{
             user-select: none;
-
+            border: 1px solid #25d366;
 
             position: absolute;
 
@@ -162,11 +164,18 @@
 
                     geticons.classList.remove('show');
 
-                    getbox.style.left = e.clientX - offsetx + "px";
-                    getbox.style.top = e.clientY - offsety + "px";
+                    let newLeft = e.clientX - offsetx;
+                    let newTop = e.clientY - offsety;
 
-                    // getbtn.style.left = "100px";
-                    // getbtn.style.left = "200px";
+                    const maxLeft = window.innerWidth - getbox.offsetWidth;
+                    const maxTop = window.innerHeight - getbox.offsetHeight;
+
+                    newLeft = Math.min(maxLeft,Math.max(0,newLeft));
+                    newTop = Math.min(maxTop,Math.max(0,newTop));
+
+                    getbox.style.left = newLeft + "px";
+                    getbox.style.top = newTop + "px";
+
 
                 }
             })
