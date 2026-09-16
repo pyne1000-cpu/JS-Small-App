@@ -17,9 +17,12 @@
         }
         .box{
             user-select: none;
+
+
             position: absolute;
 
-            /* z-index: 100; */
+
+            z-index: 100;
         }
         #btn{
             background-color: skyblue;
@@ -31,17 +34,13 @@
             padding: 10px 20px;
             cursor: move;
 
+            /* position: absolute; */
+
             z-index: 5;
         }
         #btn:active{
             transform: translateY(2px);
             box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
-        }
-        .icons{
-            position: absolute;
-            /* top: 0;
-            left: 0; */
-            z-index: 1;
         }
         .icons .btn-icon{
             width: 50px;
@@ -119,6 +118,71 @@
               getbtn.addEventListener('dblclick',function(){
                 geticons.classList.remove('show');
               })
+              
+        let isDragging = false;
+
+            drag();
+
+        function drag(){
+            down();
+            move();
+            up();
+        }
+
+        let offsetx,
+            offsety;
+
+        function down(){
+            getbtn.addEventListener('mousedown',function(e){
+                console.log('down');
+                
+                isDragging = true;
+                
+                const rect = getbtn.getBoundingClientRect();
+
+                // console.log(e.clientX); 
+                // console.log(e.clientY); 
+                // console.log(rect.left);
+                // console.log(rect.top);
+                
+                offsetx = e.clientX - rect.left;
+                offsety = e.clientY - rect.top;
+            })
+        }
+
+        function move(){
+            document.addEventListener('mousemove',function(e){
+                if(isDragging){
+                    console.log('move');
+                    console.log(e.clientX);
+                    console.log(e.clientY);
+
+                    console.log(e.clientX - offsetx);
+                    console.log(e.clientY - offsety);
+
+                    geticons.classList.remove('show');
+
+                    getbox.style.left = e.clientX - offsetx + "px";
+                    getbox.style.top = e.clientY - offsety + "px";
+
+                    // getbtn.style.left = "100px";
+                    // getbtn.style.left = "200px";
+
+                }
+            })
+        }
+
+        function up(){
+            document.addEventListener('mouseup',function(e){
+                console.log('up');
+                isDragging = false;
+            })
+        }
+
+        
+
+        
+
         
               
     </script>
