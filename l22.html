@@ -19,10 +19,9 @@
         }
         .box{
             user-select: none;
-            border: 1px solid #25d366;
+            /* border: 1px solid #25d366; */
 
             position: absolute;
-
 
             z-index: 100;
         }
@@ -102,17 +101,27 @@
     <div class="box">
         <button id="btn">Move me</button>
         <div class="icons">
-            <div class="btn-icon"><i class="fa-brands fa-facebook-f icn"></i></div>
-            <div class="btn-icon"><i class="fa-solid fa-x"></i></div>
-            <div class="btn-icon"><i class="fa-brands fa-whatsapp"></i></div>
-            <div class="btn-icon"><i class="fa-brands fa-discord"></i></div>
+            <div class="btn-icon" data-link="https://facebook.com"><i class="fa-brands fa-facebook-f icn"></i></div>
+            <div class="btn-icon" data-link="https://x.com"><i class="fa-solid fa-x"></i></div>
+            <div class="btn-icon" data-link="https://whatsapp.com"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="btn-icon" data-link="https://discord.com"><i class="fa-brands fa-discord"></i></div>
         </div>
     </div>
 
     <script>
         const getbox = document.querySelector('.box'),
               getbtn = document.getElementById('btn'),
-              geticons = document.querySelector('.icons');
+              geticons = document.querySelector('.icons'),
+              getbtnicon = document.querySelectorAll('.btn-icon');  
+              
+              getbtnicon.forEach((icon)=>{
+                icon.addEventListener('click',function(){
+                    // console.log(this);
+                    const geturl = this.getAttribute('data-link');
+                    // console.log(geturl);
+                    window.location.href = geturl;
+                })
+              })  
 
               getbtn.addEventListener('click',function(){
                 geticons.classList.add('show');
@@ -136,7 +145,7 @@
 
         function down(){
             getbtn.addEventListener('mousedown',function(e){
-                console.log('down');
+                // console.log('down');
                 
                 isDragging = true;
                 
@@ -183,7 +192,7 @@
 
         function up(){
             document.addEventListener('mouseup',function(e){
-                console.log('up');
+                // console.log('up');
                 isDragging = false;
             })
         }
